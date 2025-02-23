@@ -1,6 +1,6 @@
-import { IImageLinks } from './IImageLinks.interface';
+import IImageLinks from "./IImageLinks.interface";
 
-export interface IVolInfo {
+export default interface IVolInfo {
   title: string;
   authors: string[];
   publisher: string;
@@ -23,7 +23,7 @@ export interface Item {
   volumeInfo: IVolInfo;
 }
 
-export interface IResultBooks {
+export default interface IResultBooks {
   items: Item[];
   totalItems: number;
 }

@@ -1,4 +1,4 @@
-export interface IImageLinks {
+export default interface IImageLinks {
     smallThumbnail: string;
     thumbnail: string;
     small: string;
