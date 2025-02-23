@@ -1,6 +1,6 @@
-import IImageLinks from "./IImageLinks.interface";
+import { IImageLinks } from './IImageLinks.interface';
 
-export default interface IBook {
+export interface IBook {
   title?: string;
   authors?: string[];
   publisher?: string;
