@@ -1,0 +1,19 @@
+<section class="card">
+  <img
+    src="{{ book != undefined ? book : 'assets/images/capa-indisponivel.png'}}"
+    alt="Capa do livro">
+  <article class="info-card">
+    <p class="tittle">{{ book }}</p>
+    <p class="informations">Autoria:</p>
+    <p class="result">{{ book }}</p>
+    <p class="informations">Data de publicação:</p>
+    <p class="result">{{ book }}</p>
+    <p class="informations">Editora:</p>
+    <p class="result">{{ book }}</p>
+    <button (click)="toggleModal()">Mais detalhes</button>
+  </article>
+</section>
+<div *ngIf="openModal">
+  <app-modal-books [book]="book"
+    (toggleModal)="toggleModal()"></app-modal-books>
+</div>
