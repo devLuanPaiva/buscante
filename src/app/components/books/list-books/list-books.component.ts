@@ -6,11 +6,10 @@ import { BookComponent } from '../book/book.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 @Component({
-  selector: 'app-list-books',
-  standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, BookComponent, FontAwesomeModule],
-  templateUrl: './list-books.component.html',
-  styleUrl: './list-books.component.css',
+    selector: 'app-list-books',
+    imports: [CommonModule, FormsModule, ReactiveFormsModule, BookComponent, FontAwesomeModule],
+    templateUrl: './list-books.component.html',
+    styleUrl: './list-books.component.css'
 })
 export class ListBooksComponent {
   listBooks: [] | undefined;

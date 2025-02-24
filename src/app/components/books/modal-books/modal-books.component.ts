@@ -2,11 +2,10 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 const body = document.querySelector('body');
 @Component({
-  selector: 'app-modal-books',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './modal-books.component.html',
-  styleUrl: './modal-books.component.css',
+    selector: 'app-modal-books',
+    imports: [CommonModule],
+    templateUrl: './modal-books.component.html',
+    styleUrl: './modal-books.component.css'
 })
 export class ModalBooksComponent {
   @Input() book: Object = '';
