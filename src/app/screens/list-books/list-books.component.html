@@ -1,15 +1,16 @@
 <section class="container">
     <header>Que livro você procura?</header>
-    <form class="search">
+    <form class="search" (submit)="searchBooks($event)">
       <input
         type="search"
         [(ngModel)]="inputSearch"
+        name="searchQuery"
       >
-
-      <button (click)="searchBooks()">
+      <button type="submit">
         <fa-icon [icon]="faMagnifyingGlass" />
       </button>
     </form>
+
     <p>Busque por assunto, autoria, nome...</p>
   <div class="container-card" *ngIf="listBooks!.length > 0, else homeScreen">
     <div *ngFor="let book of listBooks">

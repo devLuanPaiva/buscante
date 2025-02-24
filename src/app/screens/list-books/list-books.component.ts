@@ -1,12 +1,12 @@
 import { Component, OnDestroy } from '@angular/core';
-import { BooksService } from '../../../services/books.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BookComponent } from '../book/book.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-import { IBook } from '../../../models';
+import { IBook } from '../../models';
 import { Subscription } from 'rxjs';
+import { BookComponent } from '../../components/books/book/book.component';
+import { BooksService } from '../../services/books.service';
 @Component({
   selector: 'app-list-books',
   imports: [CommonModule, FormsModule, ReactiveFormsModule, BookComponent, FontAwesomeModule],
@@ -17,16 +17,18 @@ export class ListBooksComponent implements OnDestroy {
   listBooks: IBook[] = [];
   inputSearch: string = '';
   faMagnifyingGlass = faMagnifyingGlass;
-  subscription!: Subscription;
+  subscription?: Subscription;
   book: IBook = {}
 
   constructor(private readonly booksService: BooksService) { }
 
-  searchBooks() {
+  searchBooks(event: Event) {
+    event.preventDefault(); 
+    console.log('Chamou searchBooks com:', this.inputSearch);
     this.subscription = this.booksService.getBooks(this.inputSearch).subscribe({
       next: (books) => (this.listBooks = this.fetchBooks(books)),
-      error: (error) => console.error('Error fetching books:', error),
-      complete: () => console.info('Books loaded!'),
+      error: (error) => console.error('Erro ao buscar livros:', error),
+      complete: () => console.info('Livros carregados!'),
     });
   }
 
@@ -46,6 +48,6 @@ export class ListBooksComponent implements OnDestroy {
     return books;
   }
   ngOnDestroy() {
-    this.subscription.unsubscribe()
+    this.subscription?.unsubscribe()
   }
 }
