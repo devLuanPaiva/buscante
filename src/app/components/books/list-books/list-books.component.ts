@@ -18,17 +18,33 @@ export class ListBooksComponent implements OnDestroy {
   inputSearch: string = '';
   faMagnifyingGlass = faMagnifyingGlass;
   subscription!: Subscription;
+  book: IBook = {}
 
   constructor(private readonly booksService: BooksService) { }
 
   searchBooks() {
     this.subscription = this.booksService.getBooks(this.inputSearch).subscribe({
-      next: (books) => (this.listBooks = books),
+      next: (books) => (this.listBooks = this.fetchBooks(books)),
       error: (error) => console.error('Error fetching books:', error),
       complete: () => console.info('Books loaded!'),
     });
   }
 
+  fetchBooks(items: any): IBook[] {
+    const books: IBook[] = [];
+    items.forEach((item: any) => {
+      books.push({
+        title: item.volumeInfo.title,
+        authors: item.volumeInfo.authors,
+        publisher: item.volumeInfo.publisher,
+        publishedDate: item.volumeInfo.publishedDate,
+        description: item.volumeInfo.description,
+        previewLink: item.volumeInfo.previewLink,
+        thumbnail: item.volumeInfo.imageLinks ? item.volumeInfo.imageLinks.thumbnail : null,
+      });
+    })
+    return books;
+  }
   ngOnDestroy() {
     this.subscription.unsubscribe()
   }
