@@ -2,10 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { IBook } from '../../../models';
 import { ModalBooksComponent } from '../modal-books/modal-books.component';
+import { AuthorsPipe } from '../../../pipes/authors.pipe';
 
 @Component({
     selector: 'app-book',
-    imports: [CommonModule, ModalBooksComponent],
+    standalone: true,
+    imports: [CommonModule, ModalBooksComponent, AuthorsPipe],
     templateUrl: './book.component.html',
     styleUrl: './book.component.css'
 })
