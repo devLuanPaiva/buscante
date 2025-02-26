@@ -22,6 +22,18 @@ describe('BookVolInfo', () => {
     expect(book.publishedDate).toBe('2024-01-01');
     expect(book.description).toBe('Test Description');
     expect(book.previewLink).toBe('http://example.com');
-    
+
+  });
+  it('should handle missing properties gracefully', () => {
+    const mockItem = {};
+    const book = new BookVolInfo(mockItem);
+
+    expect(book.title).toBeUndefined();
+    expect(book.authors).toBeUndefined();
+    expect(book.publisher).toBeUndefined();
+    expect(book.publishedDate).toBeUndefined();
+    expect(book.description).toBeUndefined();
+    expect(book.previewLink).toBeUndefined();
+    expect(book.thumbnail).toBeUndefined();
   });
 })
