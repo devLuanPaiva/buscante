@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { HttpTestingController, provideHttpClientTesting  } from '@angular/common/http/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { BooksService } from './books.service';
 import { IResultBooks, Item } from '../models';
 import { environment } from '../../environments/environment';
@@ -13,7 +13,7 @@ describe('BooksService', () => {
       providers: [
         BooksService,
         provideHttpClient(),
-        provideHttpClientTesting() 
+        provideHttpClientTesting()
       ]
     });
     service = TestBed.inject(BooksService);
@@ -65,5 +65,16 @@ describe('BooksService', () => {
     const req = httpMock.expectOne(`${environment.apiUrl}?q=Angular`);
     expect(req.request.method).toBe('GET');
     req.flush(mockResponse);
+  });
+  it('should handle errors when the request fails', () => {
+    service.getBooks('Angular').subscribe({
+      next: () => fail('Expected an error, but got a response'),
+      error: (error) => {
+        expect(error.status).toBe(500);
+      },
+    });
+
+    const req = httpMock.expectOne(`${environment.apiUrl}?q=Angular`);
+    req.flush('Error', { status: 500, statusText: 'Server Error' });
   });
 });
