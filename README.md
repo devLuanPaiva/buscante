@@ -1,27 +1,50 @@
-# Buscante
+# Buscante 🚀
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.8.
+**Versão:** 1.0  
+**Desenvolvido com:** Angular 19  
 
-## Development server
+## 📌 Sobre o projeto  
+O **Buscante** é um projeto desenvolvido durante um curso da Alura, no qual foram explorados conceitos avançados do Angular, com foco no uso do padrão **Observer** e manipulação de **Observables**.  
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## 🎯 O que foi aprendido e implementado  
 
-## Code scaffolding
+✅ **Padrão de projeto Observer**  
+✅ **Uso de Observables para manipulação de fluxos assíncronos**  
+✅ **Debug de fluxo de Observable** com o operador `tap`  
+✅ **Manipulação de dados retornados do backend** com o operador `map`  
+✅ **Otimização de buscas typeahead** com `switchMap`, `filter` e `debounceTime`  
+✅ **Unsubscribe automático** utilizando o `async pipe`  
+✅ **Tratamento de erros** com `catchError` e `throwError`  
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Status do Projeto
 
-## Build
+- **Versão:** 1.0
+- **Disponível em Produção:** [Acesse o Buscante](https://buscante-mu.vercel.app/)
+- **Testes:** O projeto conta com mais de 18 testes de software garantindo estabilidade e confiabilidade.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## 🚀 Como executar o projeto  
 
-## Running unit tests
+1. Clone o repositório:  
+   ```sh
+   git clone https://github.com/devLuanPaiva/buscante.git
+   ```
+2. Acesse a pasta do projeto:  
+   ```sh
+   cd buscante
+   ```
+3. Instale as dependências:  
+   ```sh
+   npm install
+   ```
+4. Inicie o servidor de desenvolvimento:  
+   ```sh
+   ng serve
+   ```
+5. Acesse o projeto no navegador:  
+   ```
+   http://localhost:4200
+   ```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## 📄 Licença  
+Este projeto está sob a licença MIT.  
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
