@@ -1,10 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ModalBooksComponent } from './modal-books.component';
 import { CommonModule, DOCUMENT } from '@angular/common';
-import { IBook } from '../../../models';
 import { By } from '@angular/platform-browser';
 import { mockBook } from '../../../mocks/books.mocks';
-import { EventEmitter } from '@angular/core';
 
 describe('ModalBooksComponent', () => {
   let component: ModalBooksComponent;
@@ -35,5 +33,10 @@ describe('ModalBooksComponent', () => {
     component.statusModal = true;
     component.ngOnChanges({ statusModal: { currentValue: true, previousValue: false, firstChange: false, isFirstChange: () => false } });
     expect(document.body.style.overflow).toBe('hidden');
+  });
+  it('should set body overflow to scroll when modal closes', () => {
+    component.statusModal = false;
+    component.ngOnChanges({ statusModal: { currentValue: false, previousValue: true, firstChange: false, isFirstChange: () => false } });
+    expect(document.body.style.overflow).toBe('scroll');
   });
 })
