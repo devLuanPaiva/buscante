@@ -35,4 +35,10 @@ describe("BookComponent", () => {
     fixture.detectChanges();
     expect(component.openModal).toBeFalse();
   });
+  it('should show modal when openModal is true', () => {
+    component.openModal = true;
+    fixture.detectChanges();
+    const modal = fixture.debugElement.query(By.css('app-modal-books'));
+    expect(modal).toBeTruthy();
+  });
 })
