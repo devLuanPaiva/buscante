@@ -41,4 +41,9 @@ describe("BookComponent", () => {
     const modal = fixture.debugElement.query(By.css('app-modal-books'));
     expect(modal).toBeTruthy();
   });
+  it('should display the first author', () => {
+    const authorsElement = fixture.debugElement.query(By.css('.result'));
+    expect(authorsElement.nativeElement.textContent).toContain(mockBook?.authors?.[0]);
+  });
+
 })
