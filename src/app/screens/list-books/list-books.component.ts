@@ -24,7 +24,7 @@ export class ListBooksComponent implements OnDestroy {
   listBooks: IBook[] = [];
   inputSearch: string = '';
   faMagnifyingGlass = faMagnifyingGlass;
-  subscription?: Subscription;
+  subscription: Subscription = new Subscription();
   book: IBook = {};
 
   constructor(private readonly booksService: BooksService) {}
