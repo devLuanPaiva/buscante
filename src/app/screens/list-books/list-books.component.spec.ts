@@ -5,7 +5,6 @@ import { of, throwError } from 'rxjs';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BookComponent } from '../../components/books/book/book.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { IBook, Item } from '../../models';
 import { BookVolInfo } from '../../models/class/book-vol-info';
 import { mockBooks } from '../../mocks/books.mocks';
 
@@ -47,5 +46,19 @@ describe('ListBookComponent', () => {
 
     expect(booksServiceSpy.getBooks).toHaveBeenCalledOnceWith('Angular');
     expect(component.listBooks).toEqual(expectedBooks);
+  });
+  it('must deal with errors when searching for books', () => {
+    spyOn(console, 'error'); 
+    booksServiceSpy.getBooks.and.returnValue(
+      throwError(() => new Error('Erro na API'))
+    );
+
+    component.searchBooks(new Event('submit'));
+
+    expect(booksServiceSpy.getBooks).toHaveBeenCalled();
+    expect(console.error).toHaveBeenCalledWith(
+      'Erro ao buscar livros:',
+      jasmine.any(Error)
+    );
   });
 });
