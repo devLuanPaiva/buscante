@@ -41,7 +41,14 @@ export const mockVolInfo: IVolInfo = {
 export const mockItem: Item = {
   volumeInfo: mockVolInfo,
 };
-
+export const mockBooks: Item[] = [
+  {
+    volumeInfo: mockVolInfo,
+  },
+  {
+    volumeInfo: mockVolInfo,
+  },
+];
 export const mockResultBooks: IResultBooks = {
   items: [mockItem, mockItem],
   totalItems: 2,
