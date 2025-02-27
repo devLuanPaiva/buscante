@@ -48,7 +48,7 @@ describe('ListBookComponent', () => {
     expect(component.listBooks).toEqual(expectedBooks);
   });
   it('must deal with errors when searching for books', () => {
-    spyOn(console, 'error'); 
+    spyOn(console, 'error');
     booksServiceSpy.getBooks.and.returnValue(
       throwError(() => new Error('Erro na API'))
     );
@@ -60,5 +60,12 @@ describe('ListBookComponent', () => {
       'Erro ao buscar livros:',
       jasmine.any(Error)
     );
+  });
+  it('must unsubscribe from the subscription when destroying the component', () => {
+    component.subscription = jasmine.createSpyObj('Subscription', ['unsubscribe']);
+
+    component.ngOnDestroy();
+
+    expect(component.subscription.unsubscribe).toHaveBeenCalled();
   });
 });
