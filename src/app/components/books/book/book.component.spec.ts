@@ -25,4 +25,14 @@ describe("BookComponent", () => {
     expect(titleElement.nativeElement.textContent).toContain(mockBook?.title?.slice(0, 30));
   });
 
+  it('should toggle modal on button click', () => {
+    const button = fixture.debugElement.query(By.css('button'));
+    expect(component.openModal).toBeFalse();
+    button.nativeElement.click();
+    fixture.detectChanges();
+    expect(component.openModal).toBeTrue();
+    button.nativeElement.click();
+    fixture.detectChanges();
+    expect(component.openModal).toBeFalse();
+  });
 })
