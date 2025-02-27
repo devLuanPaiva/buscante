@@ -31,5 +31,9 @@ describe('ModalBooksComponent', () => {
     const titleElement = fixture.debugElement.query(By.css('.title'));
     expect(titleElement.nativeElement.textContent).toContain(mockBook.title);
   });
-
+  it('should set body overflow to hidden when modal opens', () => {
+    component.statusModal = true;
+    component.ngOnChanges({ statusModal: { currentValue: true, previousValue: false, firstChange: false, isFirstChange: () => false } });
+    expect(document.body.style.overflow).toBe('hidden');
+  });
 })
