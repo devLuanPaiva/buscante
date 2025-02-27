@@ -39,4 +39,9 @@ describe('ModalBooksComponent', () => {
     component.ngOnChanges({ statusModal: { currentValue: false, previousValue: true, firstChange: false, isFirstChange: () => false } });
     expect(document.body.style.overflow).toBe('scroll');
   });
+  it('should open book preview in a new tab', () => {
+    spyOn(window, 'open');
+    component.readPreview();
+    expect(window.open).toHaveBeenCalledWith('_blank');
+  });
 })
