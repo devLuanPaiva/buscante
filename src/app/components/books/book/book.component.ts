@@ -12,9 +12,9 @@ import { AuthorsPipe } from '../../../pipes/authors.pipe';
   styleUrl: './book.component.css'
 })
 export class BookComponent {
-  @Input() book: IBook = {};
+  @Input() book!: IBook
   openModal: boolean = false;
-
+  
   toggleModal() {
     this.openModal = !this.openModal;
   }

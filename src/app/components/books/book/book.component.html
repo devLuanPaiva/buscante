@@ -1,6 +1,6 @@
 <section class="card">
   <img
-    src="{{ book.thumbnail ? book.thumbnail : '/assets/images/capa-indisponivel.png'}}"
+    src="{{ book.thumbnail?.thumbnail ? book.thumbnail?.thumbnail : '/assets/images/capa-indisponivel.png'}}"
     alt="Capa do livro">
   <article class="info-card">
     <p class="tittle">{{ book.title | slice:0:30 }}</p>
