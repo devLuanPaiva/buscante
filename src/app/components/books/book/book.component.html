@@ -1,6 +1,6 @@
 <section class="card">
   <img
-    src="{{ book.thumbnail != undefined ? book.thumbnail : '/assets/images/capa-indisponivel.png'}}"
+    src="{{ book.thumbnail ? book.thumbnail : '/assets/images/capa-indisponivel.png'}}"
     alt="Capa do livro">
   <article class="info-card">
     <p class="tittle">{{ book.title | slice:0:30 }}</p>
@@ -13,7 +13,10 @@
     <button (click)="toggleModal()">Mais detalhes</button>
   </article>
 </section>
-<div *ngIf="openModal">
-  <app-modal-books [book]="book"
-    (toggleModal)="toggleModal()"></app-modal-books>
-</div>
+
+<app-modal-books
+  *ngIf="openModal"
+  [book]="book"
+  [statusModal]="openModal"
+  (changedModal)="toggleModal()">
+</app-modal-books>
