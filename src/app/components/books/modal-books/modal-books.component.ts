@@ -9,12 +9,13 @@ import { IBook } from '../../../models';
   templateUrl: './modal-books.component.html',
   styleUrl: './modal-books.component.css'
 })
-export class ModalBooksComponent  implements OnChanges {
+export class ModalBooksComponent implements OnChanges {
   @Input() book: IBook = {};
-  statusModal: boolean = false;
-  @Output() changedModal = new EventEmitter();
+  @Input() statusModal: boolean = false;
+  @Output() changedModal = new EventEmitter<boolean>();
 
-  constructor(@Inject(DOCUMENT) private readonly document: Document) {}
+  constructor(@Inject(DOCUMENT) private readonly document: Document) { }
+
   ngOnChanges(changes: SimpleChanges) {
     if (changes['statusModal'] && this.statusModal) {
       this.document.body.style.overflow = 'hidden';
@@ -22,13 +23,11 @@ export class ModalBooksComponent  implements OnChanges {
       this.document.body.style.overflow = 'scroll';
     }
   }
+
   closeModal() {
-    this.statusModal = false;
-    this.changedModal.emit(this.statusModal);
+    this.changedModal.emit(false);
     this.document.body.style.overflow = 'scroll';
   }
-
-
 
   readPreview() {
     window.open('_blank');
