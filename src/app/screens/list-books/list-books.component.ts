@@ -8,7 +8,7 @@ import { BookComponent } from '../../components/books/book/book.component';
 import { IResultBooks } from './../../models/interfaces/IVolInfo.interface';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { catchError, debounceTime, filter, map, switchMap, tap } from 'rxjs';
+import { catchError, debounceTime, filter, map, switchMap, tap, throwError } from 'rxjs';
 @Component({
   selector: 'app-list-books',
   imports: [
@@ -33,26 +33,19 @@ export class ListBooksComponent {
     debounceTime(300),
     filter(value => value.length >= 3),
     tap(() => console.info('Iniciando busca...')),
-    switchMap(value => this.booksService.getBooks(value).pipe(
-      tap(result => console.log('Resposta da API:', result)),
-      map((result: any) => {
-        console.log('Tentando acessar items:', result);
-        return result?.items ?? [];
-      }),
-
-      map(books => this.onResultBooks(books)),
-      tap(books => console.log('Livros transformados:', books)),
-      catchError(error => {
-        console.log('Erro:', error);
-        this.errorMessage = 'Ops, ocorreu um erro. Recarregue a aplicação!';
-        return [];
-      })
-    ))
+    switchMap((value) => this.booksService.getBooks(value)),
+    map((results) => this.resultBooks = results),
+    tap(response => console.log(response)),
+    map((results => results.items ?? [])),
+    map((items) => this.onResultBooks(items)),
+    catchError((error) => {
+    console.error(error)
+      return throwError(() => new Error(this.errorMessage = 'Ops, ocorreu um erro. Recarregue a aplicação!'))
+    })
+    
   );
 
-
   onResultBooks(items: Item[]): BookVolInfo[] {
-    console.log('Itens recebidos:', items);
     return items.map((item) => new BookVolInfo(item));
   }
 }
