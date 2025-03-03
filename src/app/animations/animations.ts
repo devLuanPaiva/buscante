@@ -37,9 +37,17 @@ export const listAnimationTrigger = trigger('listAnimation', [
     ]),
   ]),
 ]);
+
 export const modalAnimationTrigger = trigger('modalAnimation', [
-  state('open', style({ opacity: 1, transform: 'scale(1)' })),
-  state('closed', style({ opacity: 0, transform: 'scale(0.8)' })),
-  transition('closed => open', [animate('300ms ease-out')]),
-  transition('open => closed', [animate('200ms ease-in')]),
+  state('void', style({ opacity: 0, transform: 'translate(-50%, -48%) scale(0.9) rotateX(-10deg)' })),
+  state('*', style({ opacity: 1, transform: 'translate(-50%, -50%) scale(1) rotateX(0)' })),
+  transition('void => *', animate('500ms cubic-bezier(0.23, 1, 0.32, 1)')),
+  transition('* => void', animate('300ms ease-in-out', style({ opacity: 0, transform: 'translate(-50%, -52%) scale(0.9) rotateX(10deg)' })))
 ]);
+
+export const overlayAnimationTrigger = trigger('overlayAnimation', [
+  state('void', style({ opacity: 0, backdropFilter: 'blur(0px)' })),
+  state('*', style({ opacity: 1, backdropFilter: 'blur(8px)' })),
+  transition('void <=> *', animate('500ms ease'))
+]);
+
