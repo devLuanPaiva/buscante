@@ -2,6 +2,7 @@ import {
   animate,
   query,
   stagger,
+  state,
   style,
   transition,
   trigger,
@@ -35,4 +36,10 @@ export const listAnimationTrigger = trigger('listAnimation', [
       ),
     ]),
   ]),
+]);
+export const modalAnimationTrigger = trigger('modalAnimation', [
+  state('open', style({ opacity: 1, transform: 'scale(1)' })),
+  state('closed', style({ opacity: 0, transform: 'scale(0.8)' })),
+  transition('closed => open', [animate('300ms ease-out')]),
+  transition('open => closed', [animate('200ms ease-in')]),
 ]);
