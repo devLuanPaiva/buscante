@@ -8,21 +8,25 @@
   </form>
 
   <p>Busque por assunto, autoria, nome...</p>
-  <small class="errorMessage" *ngIf="errorMessage"> {{errorMessage}} </small>
-  <small class="resultsNumber" *ngIf="foundBooks$ | async">
-    {{resultBooks?.totalItems}} resultados encontrados. </small>
+  <small class="errorMessage" *ngIf="errorMessage"> {{ errorMessage }} </small>
+  <small class="resultsNumber" *ngIf="foundBooks$ | async"> {{
+    resultBooks?.totalItems }} resultados encontrados. </small>
+
   <div class="container-card"
     *ngIf="foundBooks$ | async as listBooks; else homeScreen" @fadeIn>
+
     <div *ngFor="let book of listBooks" @slideIn>
       <app-book [book]="book"></app-book>
     </div>
+
   </div>
 
   <ng-template #homeScreen>
-    <div class="images">
+    <div class="images" @fadeIn>
       <h1 class="title">Busque o livro <br> que quiser na <br> nossa
         estante!</h1>
       <img class="ilustration" src="/assets/images/ilustracao-estante.png"
         alt="Ilustração de uma pessoa em pé ao lado de uma estante com livros e plantas">
     </div>
   </ng-template>
+</section>
