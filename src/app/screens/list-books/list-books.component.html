@@ -10,7 +10,7 @@
   <p>Busque por assunto, autoria, nome...</p>
   <small class="errorMessage" *ngIf="errorMessage"> {{errorMessage}} </small>
   <small class="resultsNumber" *ngIf="foundBooks$ | async"> {{resultBooks?.totalItems}} resultados encontrados. </small>
-  <div class="container-card" *ngIf="foundBooks$ | async as listBooks, else homeScreen">
+  <div class="container-card" *ngIf="foundBooks$ | async as listBooks, else homeScreen" @fadeIn>
 
     <div *ngFor="let book of listBooks">
 
