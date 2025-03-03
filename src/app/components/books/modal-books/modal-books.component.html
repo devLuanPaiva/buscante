@@ -1,6 +1,6 @@
 <section *ngIf="statusModal" class="container">
-  <div class="card">
-    <img class="image" [src]="book.thumbnail ? book.thumbnail : 'assets/images/capa-indisponivel.png'"
+  <article class="card">
+    <img class="image" [src]="book.thumbnail?.thumbnail ? book.thumbnail?.thumbnail : '/assets/images/capa-indisponivel.png'"
       alt="Capa do livro">
     <div class="info-card">
       <p class="title">{{ book.title }}</p>
@@ -19,6 +19,6 @@
       <h4 class="informations">Sinopse</h4>
       <p class="result">{{ book.description }}</p>
     </div>
-  </div>
+  </article>
   <div class="overlay"></div>
 </section>
