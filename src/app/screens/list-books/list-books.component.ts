@@ -9,7 +9,7 @@ import { IResultBooks } from './../../models/interfaces/IVolInfo.interface';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { catchError, debounceTime, filter, map, switchMap, tap, throwError } from 'rxjs';
-import { fadeInTrigger } from '../../animations';
+import { fadeInTrigger, slideInTrigger } from '../../animations';
 @Component({
   selector: 'app-list-books',
   imports: [
@@ -21,7 +21,7 @@ import { fadeInTrigger } from '../../animations';
   ],
   templateUrl: './list-books.component.html',
   styleUrl: './list-books.component.css',
-  animations: [fadeInTrigger]
+  animations: [fadeInTrigger, slideInTrigger]
 })
 export class ListBooksComponent {
   faMagnifyingGlass = faMagnifyingGlass;
