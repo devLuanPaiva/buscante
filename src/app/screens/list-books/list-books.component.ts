@@ -1,13 +1,11 @@
 import { Item } from '../../models';
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { BooksService } from '../../services/books.service';
 import { BookVolInfo } from '../../models/class/book-vol-info';
 import { BookComponent } from '../../components/books/book/book.component';
 import { IResultBooks } from './../../models/interfaces/IVolInfo.interface';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { catchError, debounceTime, filter, map, switchMap, tap, throwError } from 'rxjs';
 import { fadeInTrigger, slideInTrigger, listAnimationTrigger } from '../../animations';
 @Component({
@@ -16,15 +14,13 @@ import { fadeInTrigger, slideInTrigger, listAnimationTrigger } from '../../anima
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    BookComponent,
-    FontAwesomeModule,
+    BookComponent
   ],
   templateUrl: './list-books.component.html',
   styleUrl: './list-books.component.css',
   animations: [fadeInTrigger, slideInTrigger, listAnimationTrigger]
 })
 export class ListBooksComponent {
-  faMagnifyingGlass = faMagnifyingGlass;
   searchField = new FormControl()
   errorMessage = ''
   resultBooks: IResultBooks | undefined
