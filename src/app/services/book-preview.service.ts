@@ -45,4 +45,8 @@ export class BookPreviewService {
     };
     sessionStorage.setItem(this.sessionKey, JSON.stringify(bookData));
   }
+  getBookFromSession(): Partial<IBook> | null {
+    const storedBook = sessionStorage.getItem(this.sessionKey);
+    return storedBook ? JSON.parse(storedBook) : null;
+  }
 }
