@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://www.googleapis.com/books/v1/volumes',
+  apiUrl: process.env['API_URL'],
+  gemini_api_key: process.env['GEMINI_API_KEY'],
 };
