@@ -7,7 +7,7 @@ export const routes: Routes = [
     loadChildren: () => import('./screens/list-books/list-books.module').then((m) => m.ListBooksModule)
   },
   {
-    path: '/preview',
+    path: 'preview',
     loadChildren: () => import('./screens/book-preview/book-preview.component.module').then((m) => m.BookPreviewModule)
   }
 ];
