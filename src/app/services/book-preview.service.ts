@@ -20,7 +20,9 @@ export class BookPreviewService {
     const prompt = `Em português, crie com exatos 600 caracteres um preview interessante sobre o livro ${book.title}, dos autores ${book.authors}.`;
 
     const genAI = new GoogleGenerativeAI(this.apiKey);
-    const model = genAI.getGenerativeModel({ model: 'gemini-pro' });
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
+
+    
 
     return from(
       model.generateContent(prompt).then((response) => {
