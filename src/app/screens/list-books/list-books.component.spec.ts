@@ -7,6 +7,7 @@ import { BookComponent } from '../../components/books/book/book.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BookVolInfo } from '../../models/class/book-vol-info';
 import { mockBooks } from '../../mocks/books.mocks';
+import { IResultBooks } from '../../models';
 
 describe('ListBookComponent', () => {
   let component: ListBooksComponent;
@@ -38,34 +39,41 @@ describe('ListBookComponent', () => {
     fixture.detectChanges();
   });
 
-  it('must call the book service and populate the book list', () => {
-    const expectedBooks = mockBooks.map((item) => new BookVolInfo(item));
-    booksServiceSpy.getBooks.and.returnValue(of(mockBooks));
-    component.inputSearch = 'Angular';
-    component.searchBooks(new Event('submit'));
+  it('should call the book service and update resultBooks on search', () => {
+    const expectedResponse: IResultBooks = { items: mockBooks, totalItems: mockBooks.length };
+    booksServiceSpy.getBooks.and.returnValue(of(expectedResponse));
 
-    expect(booksServiceSpy.getBooks).toHaveBeenCalledOnceWith('Angular');
-    expect(component.listBooks).toEqual(expectedBooks);
+    component.searchField.setValue('Angular');
+    fixture.detectChanges();
+
+    expect(booksServiceSpy.getBooks).toHaveBeenCalledWith('Angular');
+    expect(component.resultBooks).toEqual(expectedResponse);
   });
-  it('must deal with errors when searching for books', () => {
+
+  it('should update the foundBooks$ observable correctly', (done) => {
+    const expectedResponse: IResultBooks = { items: mockBooks, totalItems: mockBooks.length };
+    booksServiceSpy.getBooks.and.returnValue(of(expectedResponse));
+
+    component.foundBooks$.subscribe((books) => {
+      expect(books).toEqual(mockBooks.map(item => new BookVolInfo(item)));
+      done();
+    });
+
+    component.searchField.setValue('Angular');
+  });
+
+  it('should handle errors when searching for books', (done) => {
     spyOn(console, 'error');
-    booksServiceSpy.getBooks.and.returnValue(
-      throwError(() => new Error('Erro na API'))
-    );
+    booksServiceSpy.getBooks.and.returnValue(throwError(() => new Error('Erro na API')));
 
-    component.searchBooks(new Event('submit'));
+    component.foundBooks$.subscribe({
+      error: (err) => {
+        expect(console.error).toHaveBeenCalled();
+        expect(component.errorMessage).toBe('Ops, ocorreu um erro. Recarregue a aplicação!');
+        done();
+      },
+    });
 
-    expect(booksServiceSpy.getBooks).toHaveBeenCalled();
-    expect(console.error).toHaveBeenCalledWith(
-      'Erro ao buscar livros:',
-      jasmine.any(Error)
-    );
-  });
-  it('must unsubscribe from the subscription when destroying the component', () => {
-    component.subscription = jasmine.createSpyObj('Subscription', ['unsubscribe']);
-
-    component.ngOnDestroy();
-
-    expect(component.subscription.unsubscribe).toHaveBeenCalled();
+    component.searchField.setValue('Angular');
   });
 });
