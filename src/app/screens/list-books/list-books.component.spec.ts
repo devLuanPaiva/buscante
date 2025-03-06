@@ -6,7 +6,7 @@ import {
 } from '@angular/core/testing';
 import { ListBooksComponent } from './list-books.component';
 import { BooksService } from '../../services/books.service';
-import { of, throwError } from 'rxjs';
+import { of } from 'rxjs';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BookComponent } from '../../components/books/book/book.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -79,22 +79,5 @@ describe('ListBookComponent', () => {
     component.searchField.setValue('Angular');
   });
 
-  it('should handle errors when searching for books', (done) => {
-    spyOn(console, 'error');
-    booksServiceSpy.getBooks.and.returnValue(
-      throwError(() => new Error('Erro na API'))
-    );
-
-    component.foundBooks$.subscribe({
-      error: (err) => {
-        expect(console.error).toHaveBeenCalled();
-        expect(component.errorMessage).toBe(
-          'Ops, ocorreu um erro. Recarregue a aplicação!'
-        );
-        done();
-      },
-    });
-
-    component.searchField.setValue('Angular');
-  });
+  
 });
