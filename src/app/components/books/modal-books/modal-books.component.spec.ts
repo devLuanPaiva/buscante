@@ -3,6 +3,7 @@ import { ModalBooksComponent } from './modal-books.component';
 import { CommonModule, DOCUMENT } from '@angular/common';
 import { By } from '@angular/platform-browser';
 import { mockBook } from '../../../mocks/books.mocks';
+import { provideAnimations } from '@angular/platform-browser/animations';
 
 describe('ModalBooksComponent', () => {
   let component: ModalBooksComponent;
@@ -13,7 +14,11 @@ describe('ModalBooksComponent', () => {
     documentSpy = jasmine.createSpyObj('Document', ['body']);
     await TestBed.configureTestingModule({
       imports: [CommonModule, ModalBooksComponent],
-      providers: [{ provide: DOCUMENT, useValue: document }],
+      providers: [
+        { provide: DOCUMENT, useValue: document },
+        provideAnimations()
+      ]
+
     }).compileComponents();
   });
 

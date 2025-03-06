@@ -8,6 +8,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BookVolInfo } from '../../models/class/book-vol-info';
 import { mockBooks } from '../../mocks/books.mocks';
 import { IResultBooks } from '../../models';
+import { provideAnimations } from '@angular/platform-browser/animations';
 
 describe('ListBookComponent', () => {
   let component: ListBooksComponent;
@@ -25,7 +26,7 @@ describe('ListBookComponent', () => {
         FontAwesomeModule,
         BookComponent,
       ],
-      providers: [{ provide: BooksService, useValue: spy }],
+      providers: [{ provide: BooksService, useValue: spy }, provideAnimations()]
     }).compileComponents();
 
     booksServiceSpy = TestBed.inject(
