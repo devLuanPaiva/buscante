@@ -1,8 +1,7 @@
-<section class="book-preview-container" @fadeIn>
-  <h2>{{ book.title }}</h2>
-  <p>de {{ book.authors }}</p>
-
-  <div class="preview-box">
-    <p class="preview-text">{{ animatedText }}</p>
-  </div>
+<section class="preview-container">
+    <h2>Prévia do Livro</h2>
+    <div class="preview-text">
+        <span [@typing]="'visible'">{{ displayedText }}</span>
+        <span class="cursor">|</span>
+    </div>
 </section>
