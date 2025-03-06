@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { IBook } from '../models';
 import { environment } from '../../environments/environment';
-import { catchError, map, Observable, throwError, from } from 'rxjs';
+import { catchError, map, Observable, throwError, from, of } from 'rxjs';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
 @Injectable({
@@ -10,7 +10,7 @@ import { GoogleGenerativeAI } from '@google/generative-ai';
 export class BookPreviewService {
   private readonly apiKey = environment.gemini_api_key;
   private readonly sessionKey = 'bookPreview';
-  constructor() {}
+  constructor() { }
 
   generateBookPreview(book: Partial<IBook>): Observable<string> {
     if (!book.authors || !book.title) {
@@ -39,14 +39,26 @@ export class BookPreviewService {
     if (!book.authors || !book.title) {
       throw new Error('Autor ou título do livro ausente.');
     }
-    const bookData = {
-      title: book.title,
-      authors: book.authors,
-    };
-    sessionStorage.setItem(this.sessionKey, JSON.stringify(bookData));
+    if (typeof window !== 'undefined') {
+      const bookData = {
+        title: book.title,
+        authors: book.authors,
+      };
+      sessionStorage.setItem(this.sessionKey, JSON.stringify(bookData));
+    }
   }
-  getBookFromSession(): Partial<IBook> | null {
-    const storedBook = sessionStorage.getItem(this.sessionKey);
-    return storedBook ? JSON.parse(storedBook) : null;
+
+  getBookFromSession(): Observable<Partial<IBook> | null> {
+    if (typeof window === 'undefined') {
+      return of(null);
+    }
+
+    return from(
+      new Promise<Partial<IBook> | null>((resolve) => {
+        const storedBook = sessionStorage.getItem(this.sessionKey);
+        resolve(storedBook ? JSON.parse(storedBook) : null);
+      })
+    );
   }
+
 }
