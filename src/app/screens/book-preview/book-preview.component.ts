@@ -1,20 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { trigger, style, animate, transition, state } from '@angular/animations';
 import { BookPreviewService } from '../../services/book-preview.service';
 import { IBook } from '../../models';
+import { typingPreviewTrigger } from '../../animations';
 
 
 @Component({
   selector: 'app-book-preview',
   templateUrl: './book-preview.component.html',
   styleUrls: ['./book-preview.component.css'],
-  animations: [
-    trigger('typing', [
-      state('hidden', style({ opacity: 0 })),
-      state('visible', style({ opacity: 1 })),
-      transition('hidden => visible', animate('0.5s ease-in')),
-    ]),
-  ],
+  animations: [typingPreviewTrigger],
 })
 export class BookPreviewComponent implements OnInit {
   book!: Partial<IBook>;
