@@ -24,15 +24,17 @@ export class BookPreviewComponent implements OnInit {
   constructor(private readonly previewService: BookPreviewService) {}
 
   ngOnInit(): void {
-    const storedBook = this.previewService.getBookFromSession();
-    if (storedBook) {
-      this.book = storedBook;
-      this.previewService.generateBookPreview(this.book).subscribe({
-        next: (generatedPreview) => this.startTypingEffect(generatedPreview),
-        error: (err) => console.error('Erro ao gerar preview:', err),
-      });
-    }
+    this.previewService.getBookFromSession().subscribe((storedBook) => {
+      if (storedBook) {
+        this.book = storedBook;
+        this.previewService.generateBookPreview(this.book).subscribe({
+          next: (generatedPreview) => this.startTypingEffect(generatedPreview),
+          error: (err) => console.error('Erro ao gerar preview:', err),
+        });
+      }
+    });
   }
+
 
   startTypingEffect(text: string) {
     this.preview = text;
