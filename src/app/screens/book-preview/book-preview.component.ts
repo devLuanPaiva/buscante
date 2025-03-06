@@ -1,14 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { trigger, style, animate, transition } from '@angular/animations';
+import { trigger, style, animate, transition, state } from '@angular/animations';
 import { BookPreviewService } from '../../services/book-preview.service';
 import { IBook } from '../../models';
-import {
-  animate,
-  state,
-  style,
-  transition,
-  trigger,
-} from '@angular/animations';
+
 
 @Component({
   selector: 'app-book-preview',
