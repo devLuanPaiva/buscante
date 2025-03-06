@@ -1,4 +1,9 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+  fakeAsync,
+  tick,
+  ComponentFixture,
+  TestBed,
+} from '@angular/core/testing';
 import { ListBooksComponent } from './list-books.component';
 import { BooksService } from '../../services/books.service';
 import { of, throwError } from 'rxjs';
@@ -26,7 +31,10 @@ describe('ListBookComponent', () => {
         FontAwesomeModule,
         BookComponent,
       ],
-      providers: [{ provide: BooksService, useValue: spy }, provideAnimations()]
+      providers: [
+        { provide: BooksService, useValue: spy },
+        provideAnimations(),
+      ],
     }).compileComponents();
 
     booksServiceSpy = TestBed.inject(
@@ -40,23 +48,31 @@ describe('ListBookComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should call the book service and update resultBooks on search', () => {
-    const expectedResponse: IResultBooks = { items: mockBooks, totalItems: mockBooks.length };
+  it('should call the book service and update resultBooks on search', fakeAsync(() => {
+    const expectedResponse: IResultBooks = {
+      items: mockBooks,
+      totalItems: mockBooks.length,
+    };
     booksServiceSpy.getBooks.and.returnValue(of(expectedResponse));
 
     component.searchField.setValue('Angular');
     fixture.detectChanges();
 
+    tick(300); 
+
     expect(booksServiceSpy.getBooks).toHaveBeenCalledWith('Angular');
     expect(component.resultBooks).toEqual(expectedResponse);
-  });
+  }));
 
   it('should update the foundBooks$ observable correctly', (done) => {
-    const expectedResponse: IResultBooks = { items: mockBooks, totalItems: mockBooks.length };
+    const expectedResponse: IResultBooks = {
+      items: mockBooks,
+      totalItems: mockBooks.length,
+    };
     booksServiceSpy.getBooks.and.returnValue(of(expectedResponse));
 
     component.foundBooks$.subscribe((books) => {
-      expect(books).toEqual(mockBooks.map(item => new BookVolInfo(item)));
+      expect(books).toEqual(mockBooks.map((item) => new BookVolInfo(item)));
       done();
     });
 
@@ -65,12 +81,16 @@ describe('ListBookComponent', () => {
 
   it('should handle errors when searching for books', (done) => {
     spyOn(console, 'error');
-    booksServiceSpy.getBooks.and.returnValue(throwError(() => new Error('Erro na API')));
+    booksServiceSpy.getBooks.and.returnValue(
+      throwError(() => new Error('Erro na API'))
+    );
 
     component.foundBooks$.subscribe({
       error: (err) => {
         expect(console.error).toHaveBeenCalled();
-        expect(component.errorMessage).toBe('Ops, ocorreu um erro. Recarregue a aplicação!');
+        expect(component.errorMessage).toBe(
+          'Ops, ocorreu um erro. Recarregue a aplicação!'
+        );
         done();
       },
     });
