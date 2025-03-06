@@ -51,3 +51,8 @@ export const overlayAnimationTrigger = trigger('overlayAnimation', [
   transition('void <=> *', animate('500ms ease'))
 ]);
 
+export const typingPreviewTrigger = trigger('typingPreview', [
+  state('hidden', style({ opacity: 0 })),
+  state('visible', style({ opacity: 1 })),
+  transition('hidden => visible', animate('0.5s ease-in')),
+])

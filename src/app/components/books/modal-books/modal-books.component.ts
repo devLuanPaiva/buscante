@@ -10,6 +10,8 @@ import {
 } from '@angular/core';
 import { IBook } from '../../../models';
 import { modalAnimationTrigger, overlayAnimationTrigger } from '../../../animations';
+import { BookPreviewService } from '../../../services/book-preview.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-modal-books',
@@ -24,7 +26,11 @@ export class ModalBooksComponent implements OnChanges {
   @Input() statusModal: boolean = false;
   @Output() changedModal = new EventEmitter<boolean>();
 
-  constructor(@Inject(DOCUMENT) private readonly document: Document) {}
+  constructor(
+    @Inject(DOCUMENT) private readonly document: Document,
+    private readonly previewService: BookPreviewService,
+    private readonly router: Router
+  ) { }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['statusModal'] && this.statusModal) {
@@ -40,6 +46,7 @@ export class ModalBooksComponent implements OnChanges {
   }
 
   readPreview() {
-    window.open('_blank');
+    this.previewService.saveBookToSession(this.book)
+    this.router.navigate(['/preview']);
   }
 }
