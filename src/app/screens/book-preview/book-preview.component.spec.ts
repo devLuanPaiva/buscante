@@ -47,4 +47,14 @@ describe('BookPreviewComponent', () => {
 
     expect(console.error).toHaveBeenCalledWith('Erro ao gerar preview:', jasmine.any(Error));
   });
+  it('should correctly animate typing effect', (done) => {
+    component.startTypingEffect('Test');
+    expect(component.preview).toBe('Test');
+    expect(component.displayedText).toBe('');
+
+    setTimeout(() => {
+      expect(component.displayedText).toBe('Test');
+      done();
+    }, component.typingSpeed * 4);
+  });
 })
