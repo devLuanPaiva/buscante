@@ -36,5 +36,15 @@ describe('BookPreviewComponent', () => {
     expect(bookPreviewServiceSpy.generateBookPreview).toHaveBeenCalledWith(mockBook);
     expect(component.book).toEqual(mockBook);
   });
+  it('should handle error when generating book preview', () => {
+    const mockBook: Partial<IBook> = { title: 'Test Book' };
+    bookPreviewServiceSpy.getBookFromSession.and.returnValue(of(mockBook));
+    bookPreviewServiceSpy.generateBookPreview.and.returnValue(throwError(() => new Error('Erro ao gerar preview')));
 
+    spyOn(console, 'error');
+
+    fixture.detectChanges();
+
+    expect(console.error).toHaveBeenCalledWith('Erro ao gerar preview:', jasmine.any(Error));
+  });
 })
