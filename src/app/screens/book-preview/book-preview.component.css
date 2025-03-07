@@ -1,0 +1,29 @@
+.preview-container {
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+  background: #e6e9f5;
+  border-radius: 10px;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.08);
+  font-family: "Courier New", Courier, monospace;
+}
+
+.preview-text {
+  font-size: 16px;
+  color: #050c42; 
+  line-height: 1.6;
+  white-space: pre-wrap;
+  min-height: 150px;
+}
+
+.cursor {
+  font-weight: bold;
+  color: #1d2be8; 
+  animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}

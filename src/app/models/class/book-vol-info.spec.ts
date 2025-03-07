@@ -27,13 +27,22 @@ describe('BookVolInfo', () => {
   it('should handle missing properties gracefully', () => {
     const mockItem = {};
     const book = new BookVolInfo(mockItem);
-
+  
     expect(book.title).toBeUndefined();
     expect(book.authors).toBeUndefined();
     expect(book.publisher).toBeUndefined();
     expect(book.publishedDate).toBeUndefined();
     expect(book.description).toBeUndefined();
     expect(book.previewLink).toBeUndefined();
-    expect(book.thumbnail).toBeUndefined();
+  
+    expect(book.thumbnail).toEqual({
+      smallThumbnail: '/assets/images/capa-indisponivel.png',
+      thumbnail: '/assets/images/capa-indisponivel.png',
+      small: '',
+      medium: '',
+      large: '',
+      extraLarge: ''
+    });
   });
+  
 })

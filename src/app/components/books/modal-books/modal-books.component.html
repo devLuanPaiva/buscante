@@ -1,25 +1,27 @@
-<section *ngIf="statusModal" class="container">
-    <div class="card">
-        <img class="image" src="{{ book.thumbnail != undefined ? book.thumbnail
-        : 'assets/images/capa-indisponivel.png'
-      }}" alt="Capa do livro">
-        <div class="info-card">
-            <p class="title">{{ book.title }}</p>
-            <p class="informations">Autoria:</p>
-            <p class="result">{{ book.authors }}</p>
-            <p class="informations">Data de publicação:</p>
-            <p class="result">{{ book.publishedDate }}</p>
-            <p class="informations">Editora:</p>
-            <p class="result">{{ book.publisher }}</p>
-            <button (click)="readPreview()" class="details">Ler prévia</button>
-        </div>
-        <button (click)="closeModal()" class="close-button">
-            <span class="material-symbols-outlined">close</span>
-        </button>
-        <div class="synopsis">
-            <h4 class="informations">Sinopse</h4>
-            <p class="result">{{ book }}</p>
-        </div>
+<section *ngIf="statusModal" class="modal-container">
+  <button class="overlay" @overlayAnimation (click)="closeModal()"></button>
+
+  <article class="modal-content" @modalAnimation>
+    
+    <div class="modal-header">
+      <img class="image" [src]="book.thumbnail?.thumbnail || '/assets/images/capa-indisponivel.png'"
+        alt="Capa do livro">
+      <div class="info">
+        <p class="title">{{ book.title }}</p>
+        <p class="author">{{ book.authors }}</p>
+      </div>
     </div>
-    <div class="overlay"></div>
+
+    <div class="modal-body">
+      <p><strong>Data de publicação:</strong> {{ book.publishedDate }}</p>
+      <p><strong>Editora:</strong> {{ book.publisher }}</p>
+    </div>
+
+    <div class="synopsis">
+      <h4>Sinopse</h4>
+      <p>{{ book.description }}</p>
+    </div>
+
+    <button (click)="readPreview()" class="details">Ler prévia</button>
+  </article>
 </section>

@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { BooksService } from './books.service';
-import { IResultBooks, Item } from '../models';
+import { IResultBooks } from '../models';
 import { environment } from '../../environments/environment';
 import { provideHttpClient } from '@angular/common/http';
 
@@ -57,9 +57,9 @@ describe('BooksService', () => {
       totalItems: 1,
     };
 
-    service.getBooks('Angular').subscribe((items: Item[]) => {
-      expect(items.length).toBe(1);
-      expect(items[0].volumeInfo.title).toBe('Book Title');
+    service.getBooks('Angular').subscribe((result: IResultBooks) => {
+      expect(result.items.length).toBe(1);
+      expect(result.items[0].volumeInfo.title).toBe('Book Title');
     });
 
     const req = httpMock.expectOne(`${environment.apiUrl}?q=Angular`);

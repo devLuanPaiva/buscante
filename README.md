@@ -1,6 +1,6 @@
 # Buscante 🚀
 
-**Versão:** 1.0  
+**Versão:** 1.5  
 **Desenvolvido com:** Angular 19  
 
 ## 📌 Sobre o projeto  
@@ -15,12 +15,14 @@ O **Buscante** é um projeto desenvolvido durante um curso da Alura, no qual for
 ✅ **Otimização de buscas typeahead** com `switchMap`, `filter` e `debounceTime`  
 ✅ **Unsubscribe automático** utilizando o `async pipe`  
 ✅ **Tratamento de erros** com `catchError` e `throwError`  
+✅ **Criação de animações** com Angular Animations  
+✅ **Integração com a API do Gemini**  
 
 ## Status do Projeto
 
-- **Versão:** 1.0
-- **Disponível em Produção:** [Acesse o Buscante](https://buscante-mu.vercel.app/)
-- **Testes:** O projeto conta com mais de 18 testes de software garantindo estabilidade e confiabilidade.
+- **Versão:** 1.5  
+- **Disponível em Produção:** [Acesse o Buscante](https://buscante-mu.vercel.app/)  
+- **Testes:** O projeto conta com mais de 26 testes de software garantindo estabilidade e confiabilidade.  
 
 ## 🚀 Como executar o projeto  
 
