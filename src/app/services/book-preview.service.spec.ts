@@ -43,4 +43,11 @@ describe('BookPreviewService', () => {
       done();
     });
   });
+  it('should return null if no book is in sessionStorage', (done) => {
+    (sessionStorage.getItem as jasmine.Spy).and.returnValue(null);
+    service.getBookFromSession().subscribe((book) => {
+      expect(book).toBeNull();
+      done();
+    });
+  });
 });
