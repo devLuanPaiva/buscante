@@ -1,6 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { BookPreviewService } from './book-preview.service';
 import { IBook } from '../models';
+import { throwError } from 'rxjs';
 
 describe('BookPreviewService', () => {
   let service: BookPreviewService;
@@ -50,4 +51,13 @@ describe('BookPreviewService', () => {
       done();
     });
   });
+  it('should handle API errors when generating book preview', (done) => {
+    spyOn(service, 'generateBookPreview').and.returnValue(throwError(() => new Error('Falha ao gerar preview do livro.')));
+    service.generateBookPreview({ title: 'Test Book', authors: ['Author'] }).subscribe({
+      error: (err) => {
+        expect(err.message).toBe('Falha ao gerar preview do livro.');
+        done();
+      },
+    });
+  })
 });
