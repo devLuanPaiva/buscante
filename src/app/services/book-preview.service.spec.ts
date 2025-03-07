@@ -37,6 +37,10 @@ describe('BookPreviewService', () => {
   it('should throw an error when saving a book with missing title or authors', () => {
     expect(() => service.saveBookToSession({ title: 'No Author' })).toThrowError('Autor ou título do livro ausente.');
   });
-
-
+  it('should retrieve book from sessionStorage', (done) => {
+    service.getBookFromSession().subscribe((book) => {
+      expect(book).toEqual({ title: 'Test Book', authors: ['Author'] });
+      done();
+    });
+  });
 });
