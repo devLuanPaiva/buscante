@@ -1,5 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { BookPreviewService } from './book-preview.service';
+import { IBook } from '../models';
 
 describe('BookPreviewService', () => {
   let service: BookPreviewService;
@@ -28,4 +29,11 @@ describe('BookPreviewService', () => {
       },
     });
   });
+  it('should save book to sessionStorage', () => {
+    const book: Partial<IBook> = { title: 'Sample Book', authors: ['Sample Author'] };
+    service.saveBookToSession(book);
+    expect(sessionStorage.setItem).toHaveBeenCalledWith('bookPreview', JSON.stringify(book));
+  });
+
+
 });
