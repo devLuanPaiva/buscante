@@ -5,6 +5,7 @@ import { mockBook } from "../../../mocks/books.mocks";
 import { AuthorsPipe } from "../../../pipes/authors.pipe";
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { ModalBooksComponent } from "../modal-books/modal-books.component";
+import { provideAnimations } from "@angular/platform-browser/animations";
 
 describe("BookComponent", () => {
   let component: BookComponent;
@@ -12,6 +13,7 @@ describe("BookComponent", () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [CommonModule, ModalBooksComponent, AuthorsPipe, BookComponent],
+      providers: [provideAnimations()]
     }).compileComponents();
   });
   beforeEach(() => {
