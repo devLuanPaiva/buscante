@@ -40,6 +40,12 @@
           },
           "configurations": {
             "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
               "budgets": [
                 {
                   "type": "initial",
@@ -52,12 +58,20 @@
                   "maximumError": "4kB"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "define": {
+                "process.env.API_URL": "\"${process.env.API_URL}\"",
+                "process.env.GEMINI_API_KEY": "\"${process.env.GEMINI_API_KEY}\""
+              }
             },
             "development": {
               "optimization": false,
               "extractLicenses": false,
-              "sourceMap": true
+              "sourceMap": true,
+              "define": {
+                "process.env.API_URL": "\"${process.env.API_URL}\"",
+                "process.env.GEMINI_API_KEY": "\"${process.env.GEMINI_API_KEY}\""
+              }
             }
           },
           "defaultConfiguration": "production"
