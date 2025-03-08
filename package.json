@@ -3,12 +3,11 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "node -r dotenv/config mynode.js && ng serve",
+    "start": "ng serve",
     "prebuild": "node vercel-build.js",
     "build": "ng build --configuration=production",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "serve:ssr:buscante": "node dist/buscante/server/server.mjs"
+    "test": "ng test"
   },
   "private": true,
   "dependencies": {
