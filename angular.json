@@ -58,20 +58,13 @@
                   "maximumError": "4kB"
                 }
               ],
-              "outputHashing": "all",
-              "define": {
-                "process.env.API_URL": "\"${process.env.API_URL}\"",
-                "process.env.GEMINI_API_KEY": "\"${process.env.GEMINI_API_KEY}\""
-              }
+              "outputHashing": "all"
+              
             },
             "development": {
               "optimization": false,
               "extractLicenses": false,
-              "sourceMap": true,
-              "define": {
-                "process.env.API_URL": "\"${process.env.API_URL}\"",
-                "process.env.GEMINI_API_KEY": "\"${process.env.GEMINI_API_KEY}\""
-              }
+              "sourceMap": true
             }
           },
           "defaultConfiguration": "production"
