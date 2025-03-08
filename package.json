@@ -3,11 +3,12 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node -r dotenv/config mynode.js && ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:buscante": "node dist/buscante/server/server.mjs"
+    "serve:ssr:buscante": "node dist/buscante/server/server.mjs",
+    "postbuild": "echo '{\"apiUrl\": \"'$API_URL'\", \"geminiApiKey\": \"'$GEMINI_API_KEY'\"}' > ./dist/buscante/assets/config.json"
   },
   "private": true,
   "dependencies": {
