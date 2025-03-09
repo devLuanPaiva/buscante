@@ -18,6 +18,6 @@ export const environment = {
 };
 `;
 
-fs.writeFileSync(path.join(environmentsPath, "environment.ts"), environmentFile(false));
-fs.writeFileSync(path.join(environmentsPath, "environment.prod.ts"), environmentFile(true));
+fs.writeFileSync(path.join(environmentsPath, "environment.ts"), environmentFile(true));
+fs.writeFileSync(path.join(environmentsPath, "environment.development.ts"), environmentFile(false));
 
