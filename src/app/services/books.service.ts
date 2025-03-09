@@ -7,7 +7,7 @@ import { IResultBooks } from '../models/index';
   providedIn: 'root',
 })
 export class BooksService {
-  private readonly url = environment.apiUrl;
+  private readonly url = environment.API_URL;
   constructor(private readonly http: HttpClient) {}
 
   getBooks(value: string): Observable<IResultBooks> {

@@ -8,9 +8,9 @@ import { GoogleGenerativeAI } from '@google/generative-ai';
   providedIn: 'root',
 })
 export class BookPreviewService {
-  private readonly apiKey = environment.gemini_api_key;
+  private readonly apiKey = environment.GEMINI_API_KEY;
   private readonly sessionKey = 'bookPreview';
-  constructor() { }
+  constructor() {}
 
   generateBookPreview(book: Partial<IBook>): Observable<string> {
     if (!book.authors || !book.title) {
@@ -20,7 +20,7 @@ export class BookPreviewService {
     const prompt = `Em português, crie com exatos 900 caracteres um preview interessante sobre o livro ${book.title}, dos autores ${book.authors}.`;
 
     const genAI = new GoogleGenerativeAI(this.apiKey);
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
+    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-pro' });
 
     return from(
       model.generateContent(prompt).then((response) => {
@@ -60,5 +60,4 @@ export class BookPreviewService {
       })
     );
   }
-
 }

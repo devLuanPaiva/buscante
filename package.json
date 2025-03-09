@@ -3,11 +3,12 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
+    "prestart": "node scripts/env.js",
     "start": "ng serve",
-    "build": "ng build",
+    "prebuild": "node scripts/env.js",
+    "build": "ng build --configuration=production",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "serve:ssr:buscante": "node dist/buscante/server/server.mjs"
+    "test": "ng test"
   },
   "private": true,
   "dependencies": {
@@ -26,6 +27,7 @@
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
     "@google/generative-ai": "^0.23.0",
+    "dotenv": "^16.4.7",
     "express": "^4.18.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
