@@ -17,9 +17,9 @@
         <app-book [book]="book"></app-book>
       </div>
     </section>
-    <app-pagination [totalItems]="resultBooks?.totalItems || 0" [itemsPerPage]="itemsPerPage"
-      (pageChange)="onPageChange($event)">
-    </app-pagination>
+    <app-pagination [totalItems]="resultBooks?.totalItems || 0" [itemsPerPage]="itemsPerPage" [currentPage]="currentPage"
+    (pageChange)="onPageChange($event)">
+  </app-pagination>
 
   </section>
 
