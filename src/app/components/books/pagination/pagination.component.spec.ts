@@ -3,6 +3,7 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 import { PaginationComponent } from './pagination.component';
 import { CommonModule } from '@angular/common';
+import { provideAnimations } from '@angular/platform-browser/animations';
 
 describe('PaginationComponent', () => {
   let component: PaginationComponent;
@@ -10,7 +11,8 @@ describe('PaginationComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PaginationComponent, CommonModule]
+      imports: [PaginationComponent, CommonModule],
+      providers: [provideAnimations()],
     })
       .compileComponents();
 
@@ -34,5 +36,13 @@ describe('PaginationComponent', () => {
     component.totalItems = 101;
     component.itemsPerPage = 10;
     expect(component.totalPages).toBe(11);
+  });
+  it('should generate pages array correctly for small number of pages', () => {
+    component.totalItems = 30;
+    component.itemsPerPage = 10;
+    component.currentPage = 1;
+    fixture.detectChanges();
+
+    expect(component.pages).toEqual([1, 2, 3]);
   });
 });
