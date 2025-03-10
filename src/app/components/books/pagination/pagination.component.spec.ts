@@ -61,4 +61,12 @@ describe('PaginationComponent', () => {
 
     expect(component.pages).toEqual([1, 2, 3, -1, 6, 7, 8, 9, 10]);
   });
+  it('should generate pages array correctly when currentPage is in the middle', () => {
+    component.totalItems = 100;
+    component.itemsPerPage = 10;
+    component.currentPage = 5;
+    fixture.detectChanges();
+
+    expect(component.pages).toEqual([1, -1, 3, 4, 5, 6, 7, -1, 10]);
+  });
 });
