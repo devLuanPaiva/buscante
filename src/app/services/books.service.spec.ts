@@ -8,6 +8,7 @@ import { provideHttpClient } from '@angular/common/http';
 describe('BooksService', () => {
   let service: BooksService;
   let httpMock: HttpTestingController;
+
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
@@ -19,6 +20,7 @@ describe('BooksService', () => {
     service = TestBed.inject(BooksService);
     httpMock = TestBed.inject(HttpTestingController);
   });
+
   afterEach(() => {
     httpMock.verify();
   });
@@ -57,24 +59,37 @@ describe('BooksService', () => {
       totalItems: 1,
     };
 
-    service.getBooks('Angular').subscribe((result: IResultBooks) => {
+    const searchQuery = 'Angular';
+    const startIndex = 0;
+    const maxResults = 10;
+
+    service.getBooks(searchQuery, startIndex, maxResults).subscribe((result: IResultBooks) => {
       expect(result.items.length).toBe(1);
       expect(result.items[0].volumeInfo.title).toBe('Book Title');
     });
 
-    const req = httpMock.expectOne(`${environment.apiUrl}?q=Angular`);
+    const req = httpMock.expectOne(
+      `${environment.API_URL}?q=${searchQuery}&startIndex=${startIndex}&maxResults=${maxResults}`
+    );
     expect(req.request.method).toBe('GET');
     req.flush(mockResponse);
   });
+
   it('should handle errors when the request fails', () => {
-    service.getBooks('Angular').subscribe({
+    const searchQuery = 'Angular';
+    const startIndex = 0;
+    const maxResults = 10;
+
+    service.getBooks(searchQuery, startIndex, maxResults).subscribe({
       next: () => fail('Expected an error, but got a response'),
       error: (error) => {
         expect(error.status).toBe(500);
       },
     });
 
-    const req = httpMock.expectOne(`${environment.apiUrl}?q=Angular`);
+    const req = httpMock.expectOne(
+      `${environment.API_URL}?q=${searchQuery}&startIndex=${startIndex}&maxResults=${maxResults}`
+    );
     req.flush('Error', { status: 500, statusText: 'Server Error' });
   });
 });

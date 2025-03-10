@@ -58,7 +58,7 @@ describe('ListBookComponent', () => {
     component.searchField.setValue('Angular');
     fixture.detectChanges();
 
-    tick(300); 
+    tick(300);
 
     expect(booksServiceSpy.getBooks).toHaveBeenCalledWith('Angular');
     expect(component.resultBooks).toEqual(expectedResponse);
@@ -78,6 +78,29 @@ describe('ListBookComponent', () => {
 
     component.searchField.setValue('Angular');
   });
+  it('should update currentPage and call getBooks with correct parameters on page change', fakeAsync(() => {
+    const expectedResponse: IResultBooks = {
+      items: mockBooks,
+      totalItems: mockBooks.length,
+    };
+    booksServiceSpy.getBooks.and.returnValue(of(expectedResponse));
+    component.searchField.setValue('Angular');
+    tick(300);
+    fixture.detectChanges();
+    const newPage = 2;
+    component.onPageChange(newPage);
 
-  
+    expect(component.currentPage).toBe(newPage);
+
+    const startIndex = (newPage - 1) * component.itemsPerPage;
+    expect(booksServiceSpy.getBooks).toHaveBeenCalledWith(
+      'Angular',
+      startIndex,
+      component.itemsPerPage
+    );
+    component.foundBooks$.subscribe((books) => {
+      expect(books).toEqual(mockBooks.map((item) => new BookVolInfo(item)));
+    });
+  }));
+
 });
