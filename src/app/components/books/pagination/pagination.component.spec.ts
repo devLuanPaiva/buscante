@@ -82,4 +82,16 @@ describe('PaginationComponent', () => {
 
     expect(component.pageChange.emit).not.toHaveBeenCalled();
   });
+  it('should apply the "active" class to the current page button', () => {
+    component.totalItems = 100;
+    component.itemsPerPage = 10;
+    component.currentPage = 2;
+    fixture.detectChanges();
+
+    const buttons: DebugElement[] = fixture.debugElement.queryAll(By.css('button'));
+    const activeButton = buttons.find(button => button.nativeElement.classList.contains('active'));
+
+    expect(activeButton).toBeTruthy();
+    expect(activeButton?.nativeElement.textContent.trim()).toBe('2');
+  });
 });
