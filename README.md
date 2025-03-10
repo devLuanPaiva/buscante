@@ -1,6 +1,6 @@
 # Buscante 🚀
 
-**Versão:** 1.5  
+**Versão:** 2.0
 **Desenvolvido com:** Angular 19  
 
 ## 📌 Sobre o projeto  
@@ -20,9 +20,9 @@ O **Buscante** é um projeto desenvolvido durante um curso da Alura, no qual for
 
 ## Status do Projeto
 
-- **Versão:** 1.5  
+- **Versão:** 2.0 
 - **Disponível em Produção:** [Acesse o Buscante](https://buscante-mu.vercel.app/)  
-- **Testes:** O projeto conta com mais de 26 testes de software garantindo estabilidade e confiabilidade.  
+- **Testes:** O projeto conta com mais de 36 testes de software garantindo estabilidade e confiabilidade.  
 
 ## 🚀 Como executar o projeto  
 
