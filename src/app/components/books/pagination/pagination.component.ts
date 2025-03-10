@@ -25,7 +25,7 @@ export class PaginationComponent {
   @Input() itemsPerPage = 10;
   @Output() pageChange = new EventEmitter<number>();
 
-  @Input() currentPage = 1; 
+  @Input() currentPage = 1;
 
   get totalPages(): number {
     return Math.ceil(this.totalItems / this.itemsPerPage);
@@ -37,18 +37,18 @@ export class PaginationComponent {
     }
 
     const pages: number[] = [];
-    if (this.currentPage <= 5) {
+    if (this.currentPage <= 4) {
       pages.push(...Array.from({ length: 5 }, (_, i) => i + 1), -1, this.totalPages - 2, this.totalPages - 1, this.totalPages);
-    } else if (this.currentPage >= this.totalPages - 4) {
+    } else if (this.currentPage >= this.totalPages - 3) {
       pages.push(1, 2, 3, -1, ...Array.from({ length: 5 }, (_, i) => this.totalPages - 4 + i));
     } else {
-      pages.push(1, -1, this.currentPage - 1, this.currentPage, this.currentPage + 1, -1, this.totalPages);
+      pages.push(1, -1, this.currentPage - 2, this.currentPage - 1, this.currentPage, this.currentPage + 1, this.currentPage + 2, -1, this.totalPages);
     }
     return pages;
   }
 
   changePage(page: number, event: Event) {
-    event.preventDefault(); 
+    event.preventDefault();
     if (page >= 1 && page <= this.totalPages && page !== this.currentPage) {
       this.currentPage = page;
       this.pageChange.emit(this.currentPage);
