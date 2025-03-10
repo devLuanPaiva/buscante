@@ -10,12 +10,14 @@
   <small class="resultsNumber" *ngIf="foundBooks$ | async"> {{
     resultBooks?.totalItems }} resultados encontrados. </small>
 
-  <div class="container-card"
-    *ngIf="foundBooks$ | async as listBooks; else homeScreen" @fadeIn>
+  <div class="container-card" *ngIf="foundBooks$ | async as listBooks; else homeScreen" @fadeIn>
 
     <div *ngFor="let book of listBooks" @slideIn>
       <app-book [book]="book"></app-book>
     </div>
+    <app-pagination [totalItems]="resultBooks?.totalItems || 0" [itemsPerPage]="itemsPerPage"
+      (pageChange)="onPageChange($event)">
+    </app-pagination>
 
   </div>
 
