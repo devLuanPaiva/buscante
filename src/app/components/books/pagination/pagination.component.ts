@@ -25,7 +25,7 @@ export class PaginationComponent {
   @Input() itemsPerPage = 10;
   @Output() pageChange = new EventEmitter<number>();
 
-  currentPage = 1;
+  @Input() currentPage = 1; 
 
   get totalPages(): number {
     return Math.ceil(this.totalItems / this.itemsPerPage);
@@ -47,7 +47,8 @@ export class PaginationComponent {
     return pages;
   }
 
-  changePage(page: number) {
+  changePage(page: number, event: Event) {
+    event.preventDefault(); 
     if (page >= 1 && page <= this.totalPages && page !== this.currentPage) {
       this.currentPage = page;
       this.pageChange.emit(this.currentPage);
