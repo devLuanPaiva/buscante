@@ -69,4 +69,16 @@ describe('PaginationComponent', () => {
 
     expect(component.pages).toEqual([1, -1, 3, 4, 5, 6, 7, -1, 10]);
   });
+  it('should emit pageChange event when a valid page is clicked', () => {
+    spyOn(component.pageChange, 'emit');
+    component.totalItems = 100;
+    component.itemsPerPage = 10;
+    component.currentPage = 1;
+    fixture.detectChanges();
+
+    const buttons: DebugElement[] = fixture.debugElement.queryAll(By.css('button'));
+    buttons[1].triggerEventHandler('click', null);
+
+    expect(component.pageChange.emit).toHaveBeenCalledWith(2);
+  });
 });
