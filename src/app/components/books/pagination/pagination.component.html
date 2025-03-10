@@ -2,7 +2,7 @@
   <button *ngFor="let page of pages"
           type="button"
           [ngClass]="{'active': page === currentPage, 'dots': page === -1}"
-          (click)="page !== -1 && changePage(page)"
+          (click)="page !== -1 && changePage(page, $event)"
           [@fade]>
     {{ page === -1 ? '...' : page }}
   </button>
