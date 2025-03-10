@@ -8,10 +8,14 @@ import { IResultBooks } from '../models/index';
 })
 export class BooksService {
   private readonly url = environment.API_URL;
-  constructor(private readonly http: HttpClient) {}
+  constructor(private readonly http: HttpClient) { }
 
-  getBooks(value: string): Observable<IResultBooks> {
-    const params = new HttpParams().append('q', value);
+  getBooks(value: string, startIndex: number = 0, maxResults: number = 10): Observable<IResultBooks> {
+    let params = new HttpParams()
+      .set('q', value)
+      .set('startIndex', startIndex)
+      .set('maxResults', maxResults);
+
     return this.http.get<IResultBooks>(this.url, { params });
   }
 }
