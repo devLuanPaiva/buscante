@@ -1,0 +1,13 @@
+.pagination {
+  max-width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.active {
+  font-weight: bold;
+  text-decoration: underline;
+}
