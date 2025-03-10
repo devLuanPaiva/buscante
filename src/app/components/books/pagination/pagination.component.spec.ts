@@ -45,4 +45,12 @@ describe('PaginationComponent', () => {
 
     expect(component.pages).toEqual([1, 2, 3]);
   });
+  it('should generate pages array correctly when currentPage is near the start', () => {
+    component.totalItems = 100;
+    component.itemsPerPage = 10;
+    component.currentPage = 3;
+    fixture.detectChanges();
+
+    expect(component.pages).toEqual([1, 2, 3, 4, 5, -1, 8, 9, 10]);
+  });
 });
