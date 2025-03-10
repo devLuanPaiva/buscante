@@ -69,7 +69,7 @@ describe('PaginationComponent', () => {
 
     expect(component.pages).toEqual([1, -1, 3, 4, 5, 6, 7, -1, 10]);
   });
-  it('should emit pageChange event when a valid page is clicked', () => {
+  it('should not emit pageChange event when clicking on the current page or dots', () => {
     spyOn(component.pageChange, 'emit');
     component.totalItems = 100;
     component.itemsPerPage = 10;
@@ -77,8 +77,9 @@ describe('PaginationComponent', () => {
     fixture.detectChanges();
 
     const buttons: DebugElement[] = fixture.debugElement.queryAll(By.css('button'));
-    buttons[1].triggerEventHandler('click', null);
+    buttons[0].triggerEventHandler('click', null);
+    buttons[5].triggerEventHandler('click', null);
 
-    expect(component.pageChange.emit).toHaveBeenCalledWith(2);
+    expect(component.pageChange.emit).not.toHaveBeenCalled();
   });
 });
