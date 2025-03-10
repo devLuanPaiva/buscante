@@ -57,9 +57,16 @@ section p {
 }
 
 .container-card {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.list-books{
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  gap: 5px;
   margin-top: 20px;
   margin-left: 20px;
   margin-right: 20px;

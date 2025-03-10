@@ -10,16 +10,18 @@
   <small class="resultsNumber" *ngIf="foundBooks$ | async"> {{
     resultBooks?.totalItems }} resultados encontrados. </small>
 
-  <div class="container-card" *ngIf="foundBooks$ | async as listBooks; else homeScreen" @fadeIn>
+  <section class="container-card" *ngIf="foundBooks$ | async as listBooks; else homeScreen" @fadeIn>
 
-    <div *ngFor="let book of listBooks" @slideIn>
-      <app-book [book]="book"></app-book>
-    </div>
+    <section class="list-books">
+      <div *ngFor="let book of listBooks" @slideIn>
+        <app-book [book]="book"></app-book>
+      </div>
+    </section>
     <app-pagination [totalItems]="resultBooks?.totalItems || 0" [itemsPerPage]="itemsPerPage"
       (pageChange)="onPageChange($event)">
     </app-pagination>
 
-  </div>
+  </section>
 
   <ng-template #homeScreen>
     <div class="images" @fadeIn>
