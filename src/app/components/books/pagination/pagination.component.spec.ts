@@ -94,4 +94,16 @@ describe('PaginationComponent', () => {
     expect(activeButton).toBeTruthy();
     expect(activeButton?.nativeElement.textContent.trim()).toBe('2');
   });
+  it('should apply the "dots" class to the dots button', () => {
+    component.totalItems = 100;
+    component.itemsPerPage = 10;
+    component.currentPage = 5;
+    fixture.detectChanges();
+
+    const buttons: DebugElement[] = fixture.debugElement.queryAll(By.css('button'));
+    const dotsButton = buttons.find(button => button.nativeElement.classList.contains('dots'));
+
+    expect(dotsButton).toBeTruthy();
+    expect(dotsButton?.nativeElement.textContent.trim()).toBe('...');
+  });
 });
