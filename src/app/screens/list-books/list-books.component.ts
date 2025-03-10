@@ -8,14 +8,16 @@ import { IResultBooks } from './../../models/interfaces/IVolInfo.interface';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { catchError, debounceTime, filter, map, switchMap, tap, throwError } from 'rxjs';
 import { fadeInTrigger, slideInTrigger, listAnimationTrigger } from '../../animations';
+import { PaginationComponent } from "../../components/books/pagination/pagination.component";
 @Component({
   selector: 'app-list-books',
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    BookComponent
-  ],
+    BookComponent,
+    PaginationComponent
+],
   templateUrl: './list-books.component.html',
   styleUrl: './list-books.component.css',
   animations: [fadeInTrigger, slideInTrigger, listAnimationTrigger]
@@ -24,6 +26,8 @@ export class ListBooksComponent {
   searchField = new FormControl()
   errorMessage = ''
   resultBooks: IResultBooks | undefined
+  currentPage = 1;
+  itemsPerPage = 10;
 
   constructor(private readonly booksService: BooksService) { }
 
@@ -37,13 +41,23 @@ export class ListBooksComponent {
     map((results => results.items ?? [])),
     map((items) => this.onResultBooks(items)),
     catchError((error) => {
-    console.error(error)
+      console.error(error)
       return throwError(() => new Error(this.errorMessage = 'Ops, ocorreu um erro. Recarregue a aplicação!'))
     })
-    
+
   );
 
+  onPageChange(page: number) {
+    this.currentPage = page;
+    const startIndex = (page - 1) * this.itemsPerPage;
+
+    this.foundBooks$ = this.booksService.getBooks(this.searchField.value, startIndex, this.itemsPerPage).pipe(
+      map(results => results.items ?? []),
+      map(items => this.onResultBooks(items))
+    );
+  }
   onResultBooks(items: Item[]): BookVolInfo[] {
     return items.map((item) => new BookVolInfo(item));
   }
+
 }
