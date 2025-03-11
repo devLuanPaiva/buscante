@@ -1,1 +1,11 @@
-<p>starts-charts works!</p>
+<div *ngIf="searchStats.length > 0">
+    <h3>Pesquisas mais buscadas</h3>
+    <ngx-charts-pie-chart
+        [results]="searchStats"
+        [view]="[400, 300]"
+        [legend]="true"
+        [explodeSlices]="true"
+        [labels]="true"
+        [doughnut]="false">
+    </ngx-charts-pie-chart>
+</div>
