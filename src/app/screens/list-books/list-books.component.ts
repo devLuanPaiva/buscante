@@ -6,9 +6,21 @@ import { BookVolInfo } from '../../models/class/book-vol-info';
 import { BookComponent } from '../../components/books/book/book.component';
 import { IResultBooks } from './../../models/interfaces/IVolInfo.interface';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { catchError, debounceTime, filter, map, switchMap, tap, throwError } from 'rxjs';
-import { fadeInTrigger, slideInTrigger, listAnimationTrigger } from '../../animations';
-import { PaginationComponent } from "../../components/books/pagination/pagination.component";
+import {
+  catchError,
+  debounceTime,
+  filter,
+  map,
+  switchMap,
+  tap,
+  throwError,
+} from 'rxjs';
+import {
+  fadeInTrigger,
+  slideInTrigger,
+  listAnimationTrigger,
+} from '../../animations';
+import { PaginationComponent } from '../../components/books/pagination/pagination.component';
 import { StatsService } from '../../services/stats.service';
 @Component({
   selector: 'app-list-books',
@@ -17,52 +29,50 @@ import { StatsService } from '../../services/stats.service';
     FormsModule,
     ReactiveFormsModule,
     BookComponent,
-    PaginationComponent
+    PaginationComponent,
   ],
   templateUrl: './list-books.component.html',
   styleUrl: './list-books.component.css',
-  animations: [fadeInTrigger, slideInTrigger, listAnimationTrigger]
+  animations: [fadeInTrigger, slideInTrigger, listAnimationTrigger],
 })
 export class ListBooksComponent {
-  searchField = new FormControl()
-  errorMessage = ''
-  resultBooks: IResultBooks | undefined
+  searchField = new FormControl();
+  errorMessage = '';
+  resultBooks: IResultBooks | undefined;
   currentPage = 1;
   itemsPerPage = 10;
 
   constructor(
     private readonly booksService: BooksService,
     private readonly statsService: StatsService
-  ) { }
+  ) {}
 
   foundBooks$ = this.searchField.valueChanges.pipe(
     debounceTime(300),
-    filter(value => value.length >= 3),
-    tap(value => this.statsService.recordSearch(value)),
-    tap(() => console.info('Iniciando busca...')),
+    filter((value) => value.length >= 3),
+    tap((value) => this.statsService.registerSearch(value)),
     switchMap((value) => this.booksService.getBooks(value)),
-    map((results) => this.resultBooks = results),
-    tap(response => console.log(response)),
-    map((results => results.items ?? [])),
+    map((results) => results.items ?? []),
     map((items) => this.onResultBooks(items)),
     catchError((error) => {
-      console.error(error)
-      return throwError(() => new Error(this.errorMessage = 'Ops, ocorreu um erro. Recarregue a aplicação!'))
+      console.error(error);
+      this.errorMessage = 'Ops, ocorreu um erro. Recarregue a aplicação!';
+      return throwError(() => new Error(this.errorMessage));
     })
-
   );
 
   onPageChange(page: number) {
     this.currentPage = page;
     const startIndex = (page - 1) * this.itemsPerPage;
 
-    this.foundBooks$ = this.booksService.getBooks(this.searchField.value, startIndex, this.itemsPerPage).pipe(
-      map(results => results.items ?? []),
-      map(items => this.onResultBooks(items))
-    );
+    this.foundBooks$ = this.booksService
+      .getBooks(this.searchField.value, startIndex, this.itemsPerPage)
+      .pipe(
+        map((results) => results.items ?? []),
+        map((items) => this.onResultBooks(items))
+      );
   }
   onResultBooks(items: Item[]): BookVolInfo[] {
     return items.map((item) => new BookVolInfo(item));
   }
-
 }
