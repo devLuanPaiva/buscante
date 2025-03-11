@@ -9,6 +9,7 @@ import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { catchError, debounceTime, filter, map, switchMap, tap, throwError } from 'rxjs';
 import { fadeInTrigger, slideInTrigger, listAnimationTrigger } from '../../animations';
 import { PaginationComponent } from "../../components/books/pagination/pagination.component";
+import { StatsService } from '../../services/stats.service';
 @Component({
   selector: 'app-list-books',
   imports: [
@@ -17,7 +18,7 @@ import { PaginationComponent } from "../../components/books/pagination/paginatio
     ReactiveFormsModule,
     BookComponent,
     PaginationComponent
-],
+  ],
   templateUrl: './list-books.component.html',
   styleUrl: './list-books.component.css',
   animations: [fadeInTrigger, slideInTrigger, listAnimationTrigger]
@@ -29,11 +30,15 @@ export class ListBooksComponent {
   currentPage = 1;
   itemsPerPage = 10;
 
-  constructor(private readonly booksService: BooksService) { }
+  constructor(
+    private readonly booksService: BooksService,
+    private readonly statsService: StatsService
+  ) { }
 
   foundBooks$ = this.searchField.valueChanges.pipe(
     debounceTime(300),
     filter(value => value.length >= 3),
+    tap(value => this.statsService.recordSearch(value)),
     tap(() => console.info('Iniciando busca...')),
     switchMap((value) => this.booksService.getBooks(value)),
     map((results) => this.resultBooks = results),
