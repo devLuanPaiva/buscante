@@ -1,49 +1,30 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class StatsService {
-  private searches: Record<string, number> = {};
-  private clicks: Record<string, number> = {};
-  private categories: Record<string, number> = {};
+  private searchCounts: { [query: string]: number } = {};
+  private readonly searchStatsSubject = new BehaviorSubject<
+    { name: string; value: number }[]
+  >([]);
 
-  constructor() {
-    this.loadFromStorage()
-  }
-  private loadFromStorage() {
-    this.searches = JSON.parse(localStorage.getItem('searchStats') ?? '{}');
-    this.clicks = JSON.parse(localStorage.getItem('clickStats') ?? '{}');
-    this.categories = JSON.parse(localStorage.getItem('categoryStats') ?? '{}');
-  }
-  private saveToStorage() {
-    localStorage.setItem('searchStats', JSON.stringify(this.searches));
-    localStorage.setItem('clickStats', JSON.stringify(this.clicks));
-    localStorage.setItem('categoryStats', JSON.stringify(this.categories));
-  }
-  recordSearch(query: string) {
-    this.searches[query] = (this.searches[query] || 0) + 1;
-    this.saveToStorage();
-  }
-  recordClick(bookTitle: string) {
-    this.clicks[bookTitle] = (this.clicks[bookTitle] || 0) + 1;
-    this.saveToStorage();
-  }
-  recordCategory(categories: string[]) {
-    categories.forEach(category => {
-      this.categories[category] = (this.categories[category] || 0) + 1;
-    });
-    this.saveToStorage();
-  }
-  getSearchStats() {
-    return this.searches;
+  searchStats$ = this.searchStatsSubject.asObservable();
+
+  registerSearch(query: string): void {
+    if (query) {
+      this.searchCounts[query] = (this.searchCounts[query] || 0) + 1;
+      this.updateChartData();
+    }
   }
 
-  getClickStats() {
-    return this.clicks;
-  }
+  private updateChartData(): void {
+    const chartData = Object.entries(this.searchCounts)
+      .map(([name, value]) => ({ name, value }))
+      .sort((a, b) => b.value - a.value)
+      .slice(0, 5);
 
-  getCategoryStats() {
-    return this.categories;
+    this.searchStatsSubject.next(chartData);
   }
 }
