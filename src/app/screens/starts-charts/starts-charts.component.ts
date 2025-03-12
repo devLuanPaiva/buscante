@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { StatsService } from '../../services/stats.service';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-starts-charts',
-  imports: [BrowserModule, NgxChartsModule],
+  standalone: true,
+  imports: [CommonModule, NgxChartsModule],
   templateUrl: './starts-charts.component.html',
   styleUrl: './starts-charts.component.css',
 })
