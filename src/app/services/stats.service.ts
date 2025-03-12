@@ -25,7 +25,7 @@ export class StatsService {
     const chartData = Object.entries(this.searchCounts)
       .map(([name, value]) => ({ name, value }))
       .sort((a, b) => b.value - a.value)
-      .slice(0, 5);
+      .slice(0, 6);
 
     this.searchStatsSubject.next(chartData);
   }
