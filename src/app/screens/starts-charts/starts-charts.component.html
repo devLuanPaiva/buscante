@@ -1,4 +1,3 @@
-
 @if (searchStats.length > 0) {
 <section>
   <h3>Pesquisas mais buscadas</h3>
@@ -11,14 +10,12 @@
     [doughnut]="true"
     [scheme]="'ocean'">
   </ngx-charts-pie-chart>
-
 </section>
-} @else {
+} @else if(searchStats.length <=0) {
 <div class="images">
   <h1 class="title">Você não realizou <br> nenhuma busca <br> em nossa
     estante!</h1>
   <img class="ilustration" src="/assets/images/ilustracao-estante.png"
     alt="Ilustração de uma pessoa em pé ao lado de uma estante com livros e plantas">
 </div>
-
 }
