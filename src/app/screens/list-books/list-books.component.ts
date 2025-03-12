@@ -9,6 +9,7 @@ import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   catchError,
   debounceTime,
+  distinctUntilChanged,
   filter,
   map,
   switchMap,
@@ -45,13 +46,15 @@ export class ListBooksComponent {
   constructor(
     private readonly booksService: BooksService,
     private readonly statsService: StatsService
-  ) {}
+  ) { }
 
   foundBooks$ = this.searchField.valueChanges.pipe(
     debounceTime(300),
     filter((value) => value.length >= 3),
-    tap((value) => this.statsService.registerSearch(value)),
-    switchMap((value) => this.booksService.getBooks(value)),
+    distinctUntilChanged(),
+    switchMap((value) => this.booksService.getBooks(value).pipe(
+      tap(() => this.statsService.registerSearch(value))
+    )),
     map((results) => results.items ?? []),
     map((items) => this.onResultBooks(items)),
     catchError((error) => {
@@ -60,6 +63,7 @@ export class ListBooksComponent {
       return throwError(() => new Error(this.errorMessage));
     })
   );
+
 
   onPageChange(page: number) {
     this.currentPage = page;
