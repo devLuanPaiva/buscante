@@ -12,11 +12,16 @@ import { CommonModule } from '@angular/common';
 export class StartsChartsComponent implements OnInit {
   searchStats: { name: string; value: number }[] = [];
 
-  constructor(private readonly searchStatsService: StatsService) {}
+  constructor(private readonly searchStatsService: StatsService) { }
 
   ngOnInit(): void {
     this.searchStatsService.searchStats$.subscribe(
-      (stats) => (this.searchStats = stats)
+      (stats) =>
+      (this.searchStats = stats.map((stat) => ({
+        ...stat,
+        value: stat.value / 2,
+      })))
     );
   }
+
 }
