@@ -12,7 +12,7 @@ import { CommonModule } from '@angular/common';
 export class StartsChartsComponent implements OnInit {
   searchStats: { name: string; value: number }[] = [];
   clickedBooksStats: { name: string; value: number }[] = [];
-
+  combinedStats: { name: string; value: number }[] = [];
   constructor(private readonly searchStatsService: StatsService) { }
 
   ngOnInit(): void {
@@ -27,6 +27,6 @@ export class StartsChartsComponent implements OnInit {
       ...stat,
       value: stat.value / 2,
     }))));
+    this.combinedStats = [...this.searchStats, ...this.clickedBooksStats];
   }
-
 }
