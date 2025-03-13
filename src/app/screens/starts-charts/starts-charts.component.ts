@@ -23,10 +23,7 @@ export class StartsChartsComponent implements OnInit {
         value: stat.value / 2,
       })))
     );
-    this.searchStatsService.clickedBooks$.subscribe((stats) => (this.clickedBooksStats = stats.map((stat) => ({
-      ...stat,
-      value: stat.value / 2,
-    }))));
+    this.searchStatsService.clickedBooks$.subscribe((stats) => (this.clickedBooksStats = stats));
     this.combinedStats = [...this.searchStats, ...this.clickedBooksStats];
   }
 }
