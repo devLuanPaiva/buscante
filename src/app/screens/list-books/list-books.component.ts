@@ -53,7 +53,10 @@ export class ListBooksComponent {
     filter((value) => value.length >= 3),
     distinctUntilChanged(),
     switchMap((value) => this.booksService.getBooks(value).pipe(
-      tap(() => this.statsService.registerSearch(value))
+      tap((results) => {
+        this.resultBooks = results;
+        this.statsService.registerSearch(value);
+      })
     )),
     map((results) => results.items ?? []),
     map((items) => this.onResultBooks(items)),
@@ -64,7 +67,6 @@ export class ListBooksComponent {
     })
   );
 
-
   onPageChange(page: number) {
     this.currentPage = page;
     const startIndex = (page - 1) * this.itemsPerPage;
@@ -72,10 +74,14 @@ export class ListBooksComponent {
     this.foundBooks$ = this.booksService
       .getBooks(this.searchField.value, startIndex, this.itemsPerPage)
       .pipe(
+        tap((results) => {
+          this.resultBooks = results;
+        }),
         map((results) => results.items ?? []),
         map((items) => this.onResultBooks(items))
       );
   }
+
   onResultBooks(items: Item[]): BookVolInfo[] {
     return items.map((item) => new BookVolInfo(item));
   }
