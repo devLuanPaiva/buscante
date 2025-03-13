@@ -1,17 +1,31 @@
-@if (searchStats.length > 0) {
-<section>
-  <h3>Pesquisas mais buscadas</h3>
-  <ngx-charts-pie-chart
-    [results]="searchStats"
-    [view]="[400, 300]"
-    [legend]="true"
-    [explodeSlices]="true"
-    [labels]="true"
-    [doughnut]="true"
-    [scheme]="'ocean'">
-  </ngx-charts-pie-chart>
+@if ((searchStats.length > 0) || (clickedBooksStats.length > 0)) {
+<section >
+  <article *ngIf="searchStats.length > 0">
+    <h3>Pesquisas mais buscadas</h3>
+    <ngx-charts-pie-chart
+      [results]="searchStats"
+      [view]="[400, 300]"
+      [legend]="true"
+      [explodeSlices]="true"
+      [labels]="true"
+      [doughnut]="true"
+      [scheme]="'ocean'">
+    </ngx-charts-pie-chart>
+  </article>
+  <article *ngIf="clickedBooksStats.length > 0">
+    <h3>Livros mais clicados</h3>
+    <ngx-charts-pie-chart
+      [results]="clickedBooksStats"
+      [view]="[400, 300]"
+      [legend]="true"
+      [explodeSlices]="true"
+      [labels]="true"
+      [doughnut]="true"
+      [scheme]="'fire'">
+    </ngx-charts-pie-chart>
+  </article>
 </section>
-} @else if(searchStats.length <=0) {
+} @else if((searchStats.length <=0) && (clickedBooksStats.length <=0)) {
 <div class="images">
   <h1 class="title">Você não realizou <br> nenhuma busca <br> em nossa
     estante!</h1>
