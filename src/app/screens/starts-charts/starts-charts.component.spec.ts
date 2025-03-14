@@ -42,4 +42,22 @@ describe('StartsChartsComponent', () => {
     const chart = fixture.debugElement.query(By.css('ngx-charts-pie-chart'));
     expect(chart).toBeTruthy();
   });
+
+  it('should display book click stats when available', () => {
+    mockStatsService.searchStats$ = of([]);
+    mockStatsService.clickedBooks$ = of([
+      { name: 'Clean Code', value: 5 },
+      { name: 'You Don’t Know JS', value: 3 },
+    ]);
+
+    fixture.detectChanges();
+
+    expect(component.clickedBooksStats.length).toBe(2);
+    expect(component.clickedBooksStats[0].value).toBe(5);
+    expect(component.clickedBooksStats[1].value).toBe(3);
+
+    const chart = fixture.debugElement.query(By.css('ngx-charts-pie-chart'));
+    expect(chart).toBeTruthy();
+  });
+
 });
