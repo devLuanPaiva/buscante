@@ -53,5 +53,15 @@ describe('StatsService', () => {
       }
     });
   });
-  
+  it('should register book clicks and update stats', (done) => {
+    service.clickedBooks$.subscribe((stats) => {
+      if (stats.length) {
+        expect(stats[0].name).toBe('clean code');
+        expect(stats[0].value).toBe(1);
+        done();
+      }
+    });
+    service.registerBookClick('Clean Code');
+  });
+
 });
