@@ -12,6 +12,7 @@ import { IBook } from '../../../models';
 import { modalAnimationTrigger, overlayAnimationTrigger } from '../../../animations';
 import { BookPreviewService } from '../../../services/book-preview.service';
 import { Router } from '@angular/router';
+import { StatsService } from '../../../services/stats.service';
 
 @Component({
   selector: 'app-modal-books',
@@ -29,6 +30,7 @@ export class ModalBooksComponent implements OnChanges {
   constructor(
     @Inject(DOCUMENT) private readonly document: Document,
     private readonly previewService: BookPreviewService,
+    private readonly statsService: StatsService,
     private readonly router: Router
   ) { }
 
@@ -47,6 +49,7 @@ export class ModalBooksComponent implements OnChanges {
 
   readPreview() {
     this.previewService.saveBookToSession(this.book)
+    this.statsService.registerBookClick(this.book.title ?? 'Título Desconhecido');
     this.router.navigate(['/preview']);
   }
 }
