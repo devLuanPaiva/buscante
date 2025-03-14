@@ -16,6 +16,8 @@ describe('StatsService', () => {
     spyOn(localStorage, 'getItem').and.callFake((key: string) => {
       return localStorageMock[key] || null;
     });
+    service['searchCounts'] = {};
+    service['clickedBooks'] = {};
   });
 
   it('should be created', () => {
@@ -29,7 +31,23 @@ describe('StatsService', () => {
         done();
       }
     });
-    service.registerSearch('angular');
+    service.registerSearch('Angular'); 
   });
 
+
+  it('should register multiple searches and sort them', (done) => {
+    service.registerSearch('angular');
+    service.registerSearch('rxjs');
+    service.registerSearch('rxjs');
+
+    service.searchStats$.subscribe((stats) => {
+      if (stats.length === 2) {
+        expect(stats[0].name).toBe('rxjs');
+        expect(stats[0].value).toBe(2);
+        expect(stats[1].name).toBe('angular');
+        expect(stats[1].value).toBe(1);
+        done();
+      }
+    });
+  });
 });
