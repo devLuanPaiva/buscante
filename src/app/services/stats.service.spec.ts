@@ -16,8 +16,11 @@ describe('StatsService', () => {
     spyOn(localStorage, 'getItem').and.callFake((key: string) => {
       return localStorageMock[key] || null;
     });
+    localStorageMock = {};
     service['searchCounts'] = {};
     service['clickedBooks'] = {};
+    service['searchStatsSubject'].next([]);
+    service['clickedBooksSubject'].next([]);
   });
 
   it('should be created', () => {
@@ -31,7 +34,7 @@ describe('StatsService', () => {
         done();
       }
     });
-    service.registerSearch('Angular'); 
+    service.registerSearch('Angular');
   });
 
 
@@ -50,4 +53,5 @@ describe('StatsService', () => {
       }
     });
   });
+  
 });
