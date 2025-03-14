@@ -59,5 +59,14 @@ describe('StartsChartsComponent', () => {
     const chart = fixture.debugElement.query(By.css('ngx-charts-pie-chart'));
     expect(chart).toBeTruthy();
   });
+  it('should show message when there are no stats', () => {
+    mockStatsService.searchStats$ = of([]);
+    mockStatsService.clickedBooks$ = of([]);
 
+    fixture.detectChanges();
+
+    const notFoundElement = fixture.debugElement.query(By.css('.images .title'));
+    expect(notFoundElement).toBeTruthy();
+    expect(notFoundElement.nativeElement.textContent.trim()).toContain('Você não realizou  nenhuma busca  em nossa estante!');
+  });
 });
