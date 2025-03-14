@@ -20,7 +20,8 @@ export class StatsService {
 
   registerSearch(query: string): void {
     if (query) {
-      this.searchCounts[query] = (this.searchCounts[query] || 0) + 1;
+      const normalizedQuery = query.toLowerCase();
+      this.searchCounts[normalizedQuery] = (this.searchCounts[normalizedQuery] || 0) + 1;
       this.updateChartData();
       this.saveToLocalStorage();
     }
@@ -28,7 +29,8 @@ export class StatsService {
 
   registerBookClick(title: string): void {
     if (title) {
-      this.clickedBooks[title] = (this.clickedBooks[title] || 0) + 1;
+      const normalizedTitle = title.toLowerCase();
+      this.clickedBooks[normalizedTitle] = (this.clickedBooks[normalizedTitle] || 0) + 1;
       this.updateClickedBooksChart();
       this.saveToLocalStorage();
     }
