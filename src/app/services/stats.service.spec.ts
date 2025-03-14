@@ -63,5 +63,14 @@ describe('StatsService', () => {
     });
     service.registerBookClick('Clean Code');
   });
+  it('should save and load data from localStorage', () => {
+    service.registerSearch('angular');
+    service.registerBookClick('clean code');
 
+    const storedSearchStats = JSON.parse(localStorageMock['searchStats']);
+    const storedClickedBooks = JSON.parse(localStorageMock['clickedBooks']);
+
+    expect(storedSearchStats['angular']).toBe(1);
+    expect(storedClickedBooks['clean code']).toBe(1);
+  });
 });
