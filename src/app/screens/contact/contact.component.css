@@ -1,0 +1,119 @@
+.section-contact {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem;
+  background: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.header-contact {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.header-contact-text h2 {
+  font-size: 1.8rem;
+  color: #333;
+}
+
+.header-contact-text p {
+  font-size: 1rem;
+  color: #666;
+}
+
+.header-contact img {
+  max-width: 80px;
+}
+
+/* Formulário */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.input-form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 0.3rem;
+}
+
+input,
+select,
+textarea {
+  padding: 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.error-message {
+  color: red;
+  font-size: 0.875rem;
+  margin-top: 0.3rem;
+}
+
+.radio-button {
+  display: flex;
+  gap: 1rem;
+}
+
+.radio-button li {
+  list-style: none;
+}
+
+.radio-button input {
+  margin-right: 0.3rem;
+}
+
+/* Botões */
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
+.cancel-button,
+.send-button {
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.cancel-button {
+  background: #ccc;
+  color: #333;
+}
+
+.cancel-button:hover {
+  background: #b3b3b3;
+}
+
+.send-button {
+  background: #007bff;
+  color: white;
+}
+
+.send-button:disabled {
+  background: #a3c2ff;
+  cursor: not-allowed;
+}
+
+.send-button:hover:not(:disabled) {
+  background: #0056b3;
+}
