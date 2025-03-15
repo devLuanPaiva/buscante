@@ -7,6 +7,14 @@ export const routes: Routes = [
       import('./screens/list-books/list-books.module').then(
         (m) => m.ListBooksModule
       ),
+    pathMatch: 'full',
+  },
+  {
+    path: '**',
+    loadChildren: () =>
+      import('./screens/not-found/not-found.module').then(
+        (m) => m.NotFoundModule
+      ),
   },
   {
     path: 'preview',
