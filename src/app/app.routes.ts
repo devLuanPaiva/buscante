@@ -10,13 +10,6 @@ export const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: '**',
-    loadChildren: () =>
-      import('./screens/not-found/not-found.module').then(
-        (m) => m.NotFoundModule
-      ),
-  },
-  {
     path: 'preview',
     loadChildren: () =>
       import('./screens/book-preview/book-preview.component.module').then(
@@ -34,5 +27,12 @@ export const routes: Routes = [
     path: 'contato',
     loadChildren: () =>
       import('./screens/contact/contact.module').then((m) => m.ContactModule),
+  },
+  {
+    path: '**',
+    loadChildren: () =>
+      import('./screens/not-found/not-found.module').then(
+        (m) => m.NotFoundModule
+      ),
   },
 ];
