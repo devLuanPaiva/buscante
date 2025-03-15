@@ -22,4 +22,9 @@ export const routes: Routes = [
         (m) => m.StartsChartsModule
       ),
   },
+  {
+    path: 'contato',
+    loadChildren: () =>
+      import('./screens/contact/contact.module').then((m) => m.ContactModule),
+  },
 ];
