@@ -1,10 +1,10 @@
-<section *ngIf="statusModal" class="modal-container">
+<dialog [open]="statusModal" class="modal-container">
   <button class="overlay" @overlayAnimation (click)="closeModal()"></button>
 
   <article class="modal-content" @modalAnimation>
-    
     <div class="modal-header">
-      <img class="image" [src]="book.thumbnail?.thumbnail || '/assets/images/capa-indisponivel.png'"
+      <img class="image"
+        [src]="book.thumbnail?.thumbnail || '/assets/images/capa-indisponivel.png'"
         alt="Capa do livro">
       <div class="info">
         <p class="title">{{ book.title }}</p>
@@ -24,4 +24,4 @@
 
     <button (click)="readPreview()" class="details">Ler prévia</button>
   </article>
-</section>
+</dialog>
