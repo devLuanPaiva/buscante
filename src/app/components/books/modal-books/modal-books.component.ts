@@ -1,4 +1,5 @@
 import { CommonModule, DOCUMENT } from '@angular/common';
+import { A11yModule } from '@angular/cdk/a11y';
 import {
   Component,
   EventEmitter,
@@ -7,6 +8,7 @@ import {
   Inject,
   OnChanges,
   SimpleChanges,
+  HostListener,
 } from '@angular/core';
 import { IBook } from '../../../models';
 import { modalAnimationTrigger, overlayAnimationTrigger } from '../../../animations';
@@ -17,7 +19,7 @@ import { StatsService } from '../../../services/stats.service';
 @Component({
   selector: 'app-modal-books',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, A11yModule],
   templateUrl: './modal-books.component.html',
   styleUrl: './modal-books.component.css',
   animations: [modalAnimationTrigger, overlayAnimationTrigger],
@@ -33,6 +35,11 @@ export class ModalBooksComponent implements OnChanges {
     private readonly statsService: StatsService,
     private readonly router: Router
   ) { }
+  @HostListener('document:keydown.escape') closeModalPressingEsc() {
+    if(this.statusModal) {
+      this.closeModal()
+    }
+  }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['statusModal'] && this.statusModal) {
