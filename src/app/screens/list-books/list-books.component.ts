@@ -1,5 +1,5 @@
 import { Item } from '../../models';
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BooksService } from '../../services/books.service';
 import { BookVolInfo } from '../../models/class/book-vol-info';
@@ -36,28 +36,35 @@ import { StatsService } from '../../services/stats.service';
   styleUrl: './list-books.component.css',
   animations: [fadeInTrigger, slideInTrigger, listAnimationTrigger],
 })
-export class ListBooksComponent {
+export class ListBooksComponent implements AfterViewInit {
   searchField = new FormControl();
   errorMessage = '';
   resultBooks: IResultBooks | undefined;
   currentPage = 1;
   itemsPerPage = 10;
+  @ViewChild('searchFieldElement') searchFieldElement!: ElementRef;
 
   constructor(
     private readonly booksService: BooksService,
     private readonly statsService: StatsService
-  ) { }
+  ) {}
+  
+  ngAfterViewInit(): void {
+    this.searchFieldElement.nativeElement.focus();
+  }
 
   foundBooks$ = this.searchField.valueChanges.pipe(
     debounceTime(300),
     filter((value) => value.length >= 3),
     distinctUntilChanged(),
-    switchMap((value) => this.booksService.getBooks(value).pipe(
-      tap((results) => {
-        this.resultBooks = results;
-        this.statsService.registerSearch(value);
-      })
-    )),
+    switchMap((value) =>
+      this.booksService.getBooks(value).pipe(
+        tap((results) => {
+          this.resultBooks = results;
+          this.statsService.registerSearch(value);
+        })
+      )
+    ),
     map((results) => results.items ?? []),
     map((items) => this.onResultBooks(items)),
     catchError((error) => {
