@@ -1,13 +1,15 @@
-<dialog [open]="statusModal" class="modal-container">
-  <button class="overlay" @overlayAnimation (click)="closeModal()"></button>
-
+<dialog
+  cdkTrapFocus
+  cdkTrapFocusAutoCapture="true"
+  [open]="statusModal"
+  class="modal-container">
   <article class="modal-content" @modalAnimation>
     <div class="modal-header">
       <img class="image"
         [src]="book.thumbnail?.thumbnail || '/assets/images/capa-indisponivel.png'"
-        alt="Capa do livro">
+        alt="Capa do livro:{{book.title}}">
       <div class="info">
-        <p class="title">{{ book.title }}</p>
+        <h2 class="title">{{ book.title }}</h2>
         <p class="author">{{ book.authors }}</p>
       </div>
     </div>
@@ -22,6 +24,8 @@
       <p>{{ book.description }}</p>
     </div>
 
-    <button (click)="readPreview()" class="details">Ler prévia</button>
+    <button [attr.aria-label]="'Ler prévia do livro ' + book.title"
+      (click)="readPreview()" class="details">Ler prévia</button>
   </article>
+  <button class="overlay" @overlayAnimation (click)="closeModal()"></button>
 </dialog>

@@ -1,17 +1,26 @@
 <section class="container-section">
-  <header>Que livro você procura?</header>
   <form class="search">
-    <input type="search" [formControl]="searchField">
+    <label for="searchField">Que livro você procura?</label>
+    <input
+      aria-label="Campo de busca"
+      type="search"
+      [formControl]="searchField"
+      #searchFieldElement>
   </form>
 
   <p>Busque por assunto, autoria, nome...</p>
   @if(errorMessage){
-  <small class="errorMessage">{{errorMessage}} </small>
+  <small
+    role="alert"
+    aria-label="Mensagem de erro"
+    class="errorMessage">
+    {{errorMessage}}
+  </small>
   }
 
   @if (foundBooks$ | async; as listBooks) {
-  <section class="container-card" @fadeIn>
-    <ul class="list-books">
+  <section class="container-card" aria-label="Resultados da busca" @fadeIn>
+    <ul class="list-books" aria-label="Lista de livros encontrados">
       @for(book of listBooks; track book.title){
       <li @slideIn>
         <app-book [book]="book"></app-book>
@@ -26,7 +35,7 @@
 
   } @else {
 
-  <section class="images" @fadeIn>
+  <section aria-label="Página inicial" class="images" @fadeIn>
     <h1 class="title">Busque o livro <br> que quiser na <br> nossa
       estante!</h1>
     <img class="ilustration" src="/assets/images/ilustracao-estante.png"

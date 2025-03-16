@@ -17,6 +17,8 @@
                     id="name"
                     placeholder="Digite seu nome completo"
                     formControlName="name"
+                    aria-describedby="error-name"
+                    [attr.aria-invalid]="contactForm.get('name')?.invalid"
                     required>
 
                 @if (contactForm.get('name')?.errors?.['required']) {
@@ -31,6 +33,8 @@
                     id="email"
                     placeholder="Digite seu email"
                     formControlName="email"
+                    aria-describedby="error-email error-email-invalid"
+                    [attr.aria-invalid]="contactForm.get('email')?.invalid"
                     required>
 
                 @if (contactForm.get('email')?.errors?.['required']) {
@@ -38,7 +42,7 @@
                     obrigatório</span>
                 }
                 @if (contactForm.get('email')?.errors?.['email']) {
-                <span id="error-email" class="error-message">Formato de e-mail
+                <span id="error-email-invalid" class="error-message">Formato de e-mail
                     inválido</span>
                 }
             </div>
@@ -49,6 +53,8 @@
                     id="phone"
                     placeholder="(xx) xxxxx-xxxx"
                     formControlName="phone"
+                    aria-describedby="error-phone"
+                    [attr.aria-invalid]="contactForm.get('phone')?.invalid"
                     required>
 
                 @if (contactForm.get('phone')?.errors?.['required']) {
@@ -112,6 +118,8 @@
                     id="message"
                     placeholder="Digite sua mensagem"
                     formControlName="message"
+                    aria-describedby="error-message"
+                    [attr.aria-invalid]="contactForm.get('message')?.invalid"
                     required></textarea>
                 @if (contactForm.get('message')?.errors?.['required']) {
                 <span id="error-message" class="error-message">Mensagem
@@ -128,7 +136,7 @@
             <button
                 class="send-button"
                 type="submit"
-                [disabled]="contactForm.invalid">
+                [attr.aria-disabled]="contactForm.invalid">
                 Enviar
             </button>
         </div>
