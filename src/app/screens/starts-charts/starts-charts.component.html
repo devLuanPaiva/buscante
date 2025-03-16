@@ -1,6 +1,8 @@
-<section *ngIf="combinedStats.length > 0; else notFound">
+<section>
+  @if (combinedStats.length > 0) {
   <output id="searchStatsOutput" aria-live="polite">
-    <article *ngIf="searchStats && searchStats.length > 0">
+    @if (searchStats && searchStats.length > 0) {
+    <article>
       <h3>Pesquisas mais buscadas</h3>
       <ngx-charts-pie-chart
         [results]="searchStats"
@@ -14,10 +16,12 @@
         aria-describedby="searchStatsOutput">
       </ngx-charts-pie-chart>
     </article>
+    }
   </output>
 
   <output id="clickedBooksStatsOutput" aria-live="polite">
-    <article *ngIf="clickedBooksStats && clickedBooksStats.length > 0">
+    @if (clickedBooksStats && clickedBooksStats.length > 0) {
+    <article>
       <h3>Livros mais clicados</h3>
       <ngx-charts-pie-chart
         [results]="clickedBooksStats"
@@ -31,15 +35,14 @@
         aria-describedby="searchStatsOutput">
       </ngx-charts-pie-chart>
     </article>
+    }
   </output>
-
-</section>
-
-<ng-template #notFound>
+  } @else {
   <div class="images">
     <h1 class="title">Você não realizou <br> nenhuma busca <br> em nossa
       estante!</h1>
     <img class="ilustration" src="/assets/images/ilustracao-estante.png"
-      alt="Ilustração de uma pessoa em pé ao lado de uma estante com livros e plantas">
+      alt="Pessoa em pé ao lado de uma estante com livros e plantas, representando a falta de buscas realizadas">
   </div>
-</ng-template>
+  }
+</section>
