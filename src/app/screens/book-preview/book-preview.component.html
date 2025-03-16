@@ -1,10 +1,11 @@
 <section class="container-preview-section">
-  <img src="/assets/images/ilustracao-preview.png" alt="ilustração preview">
+  <img src="/assets/images/ilustracao-preview.png"
+    alt="Ilustração representando a prévia do livro">
   <article class="preview-container">
-      <h2>Prévia do Livro</h2>
-      <div class="preview-text">
-          <span [@typingPreview]="'visible'">{{ displayedText }}</span>
-          <span class="cursor">|</span>
-      </div>
+    <h2>Prévia do Livro</h2>
+    <output id="previewOutput" aria-live="polite" class="preview-text">
+      <span [@typingPreview]="'visible'">{{ displayedText }}</span>
+    </output>
+    <span class="cursor" aria-hidden="true">|</span>
   </article>
 </section>
