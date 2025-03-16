@@ -15,6 +15,7 @@ export const routes: Routes = [
       import('./screens/book-preview/book-preview.component.module').then(
         (m) => m.BookPreviewModule
       ),
+    title: 'Preview de Livro',
   },
   {
     path: 'estatisticas',
@@ -22,11 +23,13 @@ export const routes: Routes = [
       import('./screens/starts-charts/starts-charts.module').then(
         (m) => m.StartsChartsModule
       ),
+    title: 'Estatisticas',
   },
   {
     path: 'contato',
     loadChildren: () =>
       import('./screens/contact/contact.module').then((m) => m.ContactModule),
+    title: 'Entre em contato',
   },
   {
     path: '**',
