@@ -1,9 +1,21 @@
 <header>
-    <button (click)="goToHomeScreen()">
+    <a
+        routerLink="/"
+        ariaCurrentWhenActive="page">
         <img src="/assets/images/logo.png" alt="Logo da aplicação Buscante">
-    </button>
+    </a>
     <nav>
-        <a href="/estatisticas" >Estatísticas</a>
-        <a href="/contato" >Contato</a>
+        <a
+            routerLink="/estatisticas"
+            routerLinkActive="active-page"
+            ariaCurrentWhenActive="page">
+            Estatísticas
+        </a>
+        <a
+            routerLink="/contato"
+            routerLinkActive="active-page"
+            ariaCurrentWhenActive="page">
+            Contato
+        </a>
     </nav>
 </header>
