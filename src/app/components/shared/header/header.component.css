@@ -3,15 +3,17 @@ header {
   height: 96px;
   width: 100%;
   display: flex;
+  padding: 10px;
+  flex-direction: column;
   align-items: center;
   justify-content: space-around;
   font-family: "Poppins", sans-serif;
   box-shadow: 0 0 5px rgba(74, 144, 226, 0.3);
-
+  box-sizing: border-box;
   & nav {
-    width: 50%;
+    width: 100%;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-around;
     align-items: center;
     gap: 10px;
 
@@ -20,7 +22,7 @@ header {
       color: #ffffff;
       font-style: normal;
       font-weight: 400;
-      font-size: 1.2rem;
+      font-size: 1rem;
       padding: 3px 5px;
       text-align: center;
       display: flex;
@@ -33,18 +35,40 @@ header {
         transition: background 0.3s, transform 0.2s;
       }
     }
+    & .active-page {
+      background-color: #fff;
+      color: #050c42;
+      transition: background 0.3s, transform 0.2s;
+    }
+  }
+  & a {
+    background-color: #050c42;
+    cursor: pointer;
+    border: none;
+
+    & img {
+      width: 200px;
+      height: 39px;
+    }
   }
 }
 
-
-
-button {
-  background-color: #050c42;
-  cursor: pointer;
-  border: none;
-
-  & img {
-    width: 230px;
-    height: 49px;
+@media (min-width: 640px) {
+  header {
+    flex-direction: row;
+    padding: 10px 0px;
+    & nav {
+      width: 50%;
+      justify-content: flex-end;
+    }
+  }
+}
+@media (min-width: 768px) {
+  header > nav a {
+    font-size: 1.2rem;
+  }
+  header > a img {
+    width: 250px;
+    height: 50px;
   }
 }

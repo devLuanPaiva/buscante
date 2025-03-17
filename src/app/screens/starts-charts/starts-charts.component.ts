@@ -17,11 +17,7 @@ export class StartsChartsComponent implements OnInit {
 
   ngOnInit(): void {
     this.searchStatsService.searchStats$.subscribe(
-      (stats) =>
-      (this.searchStats = stats.map((stat) => ({
-        ...stat,
-        value: stat.value / 2,
-      })))
+      (stats) =>(this.searchStats = stats)
     );
     this.searchStatsService.clickedBooks$.subscribe((stats) => (this.clickedBooksStats = stats));
     this.combinedStats = [...this.searchStats, ...this.clickedBooksStats];

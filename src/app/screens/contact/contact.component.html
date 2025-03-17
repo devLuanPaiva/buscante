@@ -1,0 +1,144 @@
+<div class="section-contact">
+    <section class="header-contact">
+        <div class="header-contact-text">
+            <h2>Entre em contato</h2>
+            <p>Alguma dúvida, crítica ou sugestão? <br>Entre em contato!</p>
+        </div>
+        <figure>
+            <img src="/assets/images/contato.png" alt="Representa contato">
+        </figure>
+    </section>
+    <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="form">
+        <fieldset>
+            <div class="input-form">
+                <label for="name">Nome</label>
+                <input
+                    type="text"
+                    id="name"
+                    placeholder="Digite seu nome completo"
+                    formControlName="name"
+                    aria-describedby="error-name"
+                    [attr.aria-invalid]="contactForm.get('name')?.invalid"
+                    required>
+
+                @if (contactForm.get('name')?.errors?.['required']) {
+                <span id="error-name" class="error-message">Nome
+                    obrigatório</span>
+                }
+            </div>
+            <div class="input-form">
+                <label for="email">Email</label>
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Digite seu email"
+                    formControlName="email"
+                    aria-describedby="error-email error-email-invalid"
+                    [attr.aria-invalid]="contactForm.get('email')?.invalid"
+                    required>
+
+                @if (contactForm.get('email')?.errors?.['required']) {
+                <span id="error-email" class="error-message">Email
+                    obrigatório</span>
+                }
+                @if (contactForm.get('email')?.errors?.['email']) {
+                <span id="error-email-invalid" class="error-message">Formato de e-mail
+                    inválido</span>
+                }
+            </div>
+            <div class="input-form">
+                <label for="phone">Telefone</label>
+                <input
+                    type="tel"
+                    id="phone"
+                    placeholder="(xx) xxxxx-xxxx"
+                    formControlName="phone"
+                    aria-describedby="error-phone"
+                    [attr.aria-invalid]="contactForm.get('phone')?.invalid"
+                    required>
+
+                @if (contactForm.get('phone')?.errors?.['required']) {
+                <span id="error-phone" class="error-message">Telefone
+                    obrigatório</span>
+                }
+            </div>
+        </fieldset>
+        <fieldset>
+            <div class="input-form">
+                <label for="reasonForContact">Qual o motivo do contato?</label>
+                <select id="reasonForContact"
+                    formControlName="reasonForContact">
+                    <option value disabled selected>Selecione a melhor
+                        opção</option>
+                    <option value="support">Suporte</option>
+                    <option value="suggestions">Sugestões</option>
+                    <option value="feedback">Feedback</option>
+                </select>
+            </div>
+        </fieldset>
+        <fieldset>
+            <label for="bestWayToContact">Qual a melhor forma de retorno do seu
+                contato?</label>
+            <div class="input-form">
+                <ul class="radio-button">
+                    <li>
+                        <label for="email">
+                            <input
+                                type="radio"
+                                id="contact-email"
+                                formControlName="bestWayToContact"
+                                value="email">Email
+                        </label>
+                    </li>
+                    <li>
+                        <label for="phone">
+                            <input
+                                type="radio"
+                                id="contact-phone"
+                                formControlName="bestWayToContact"
+                                value="phone">Telefone
+                        </label>
+                    </li>
+                    <li>
+                        <label for="whastapp">
+                            <input
+                                type="radio"
+                                id="contact-whastapp"
+                                formControlName="bestWayToContact"
+                                value="whastapp">Whastapp
+                        </label>
+                    </li>
+                </ul>
+            </div>
+        </fieldset>
+        <fieldset>
+            <div class="input-form">
+                <label for="message">Mensagem</label>
+                <textarea
+                    id="message"
+                    placeholder="Digite sua mensagem"
+                    formControlName="message"
+                    aria-describedby="error-message"
+                    [attr.aria-invalid]="contactForm.get('message')?.invalid"
+                    required></textarea>
+                @if (contactForm.get('message')?.errors?.['required']) {
+                <span id="error-message" class="error-message">Mensagem
+                    obrigatória</span>}
+            </div>
+        </fieldset>
+        <div class="buttons">
+            <button
+                type="button"
+                class="cancel-button"
+                (click)="goToHome()">
+                Cancelar
+            </button>
+            <button
+                class="send-button"
+                type="submit"
+                [attr.aria-disabled]="contactForm.invalid">
+                Enviar
+            </button>
+        </div>
+    </form>
+</div>

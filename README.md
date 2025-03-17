@@ -1,6 +1,6 @@
 # Buscante 🚀
 
-**Versão:** 2.5
+**Versão:** 3.0
 
 **Desenvolvido com:** Angular 19  
 
@@ -19,14 +19,13 @@ O **Buscante** é um projeto desenvolvido durante um curso da Alura, no qual for
 ✅ **Criação de animações** com Angular Animations  
 ✅ **Integração com a API do Gemini**  
 ✅ **Integração com a biblioteca @swimlane/ngx-charts** para criação de gráficos estatísticos mostrando os livros mais buscados  
+✅ **Técnicas de acessibilidade aplicadas** para tornar o projeto mais inclusivo  
 
 ## Status do Projeto
 
-
-- **Versão:** 2.5  
+- **Versão:** 3.0  
 - **Disponível em Produção:** [Acesse o Buscante](https://buscante-mu.vercel.app/)  
-- **Testes:** O projeto conta com mais de 45 testes de software garantindo estabilidade e confiabilidade.  
-
+- **Testes:** O projeto conta com mais de 53 testes de software garantindo estabilidade e confiabilidade.  
 
 ## 🚀 Como executar o projeto  
 
@@ -53,4 +52,3 @@ O **Buscante** é um projeto desenvolvido durante um curso da Alura, no qual for
 
 ## 📄 Licença  
 Este projeto está sob a licença MIT.  
-
