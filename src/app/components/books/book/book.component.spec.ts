@@ -23,7 +23,7 @@ describe("BookComponent", () => {
     fixture.detectChanges();
   });
   it('should display book title', () => {
-    const titleElement = fixture.debugElement.query(By.css('.tittle'));
+    const titleElement = fixture.debugElement.query(By.css('.title'));
     expect(titleElement.nativeElement.textContent).toContain(mockBook?.title?.slice(0, 30));
   });
 
