@@ -64,4 +64,20 @@ describe('ContactComponent', () => {
     const button = fixture.debugElement.query(By.css('.send-button'));
     expect(button.nativeElement.getAttribute('aria-disabled')).toBe('true');
   });
+  it('must accept valid values', async () => {
+    component.contactForm.setValue({
+      name: 'João Silva',
+      email: 'joao@email.com',
+      phone: '11987654321',
+      message: 'Olá, preciso de ajuda.',
+      reasonForContact: 'support',
+      bestWayToContact: 'email',
+    });
+
+    fixture.detectChanges();
+    await fixture.whenStable();
+
+    expect(component.contactForm.valid).toBeTrue();
+  });
+
 });
