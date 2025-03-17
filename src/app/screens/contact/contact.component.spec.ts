@@ -51,5 +51,17 @@ describe('ContactComponent', () => {
     component.goToHome();
     expect(routerSpy.navigate).toHaveBeenCalledWith(['/']);
   });
-
+  it('should disable submit button if form is invalid', () => {
+    component.contactForm.setValue({
+      name: '',
+      email: '',
+      phone: '',
+      message: '',
+      reasonForContact: '',
+      bestWayToContact: 'email',
+    });
+    fixture.detectChanges();
+    const button = fixture.debugElement.query(By.css('.send-button'));
+    expect(button.nativeElement.getAttribute('aria-disabled')).toBe('true');
+  });
 });
