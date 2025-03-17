@@ -47,4 +47,9 @@ describe('ContactComponent', () => {
     });
     expect(component.contactForm.valid).toBeFalse();
   });
+  it('must navigate to home page when canceling', () => {
+    component.goToHome();
+    expect(routerSpy.navigate).toHaveBeenCalledWith(['/']);
+  });
+
 });
