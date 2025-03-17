@@ -79,5 +79,22 @@ describe('ContactComponent', () => {
 
     expect(component.contactForm.valid).toBeTrue();
   });
+  it('must reset the form when submitting', async () => {
+    spyOn(component.contactForm, 'reset');
 
+    component.contactForm.setValue({
+      name: 'Maria',
+      email: 'maria@email.com',
+      phone: '11987654321',
+      message: 'Ajuda',
+      reasonForContact: 'support',
+      bestWayToContact: 'phone',
+    });
+
+    fixture.detectChanges();
+    await fixture.whenStable();
+
+    component.onSubmit();
+    expect(component.contactForm.reset).toHaveBeenCalled();
+  });
 });
