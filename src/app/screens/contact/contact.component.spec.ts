@@ -36,4 +36,15 @@ describe('ContactComponent', () => {
     expect(component.contactForm.controls['reasonForContact']).toBeDefined();
     expect(component.contactForm.controls['bestWayToContact']).toBeDefined();
   });
+  it('must validate the form correctly', () => {
+    component.contactForm.setValue({
+      name: '',
+      email: '',
+      phone: '',
+      message: '',
+      reasonForContact: '',
+      bestWayToContact: 'email',
+    });
+    expect(component.contactForm.valid).toBeFalse();
+  });
 });
