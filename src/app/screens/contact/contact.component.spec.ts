@@ -1,17 +1,24 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ContactComponent } from './contact.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { By } from '@angular/platform-browser';
 
 describe('ContactComponent', () => {
   let component: ContactComponent;
   let fixture: ComponentFixture<ContactComponent>;
+  let routerSpy: jasmine.SpyObj<Router>;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [ContactComponent]
-    })
-    .compileComponents();
+    routerSpy = jasmine.createSpyObj('Router', ['navigate']);
 
+    await TestBed.configureTestingModule({
+      imports: [ReactiveFormsModule, ContactComponent],
+      providers: [{ provide: Router, useValue: routerSpy }],
+    }).compileComponents();
+  });
+
+  beforeEach(() => {
     fixture = TestBed.createComponent(ContactComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -19,5 +26,14 @@ describe('ContactComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+  it('must initialize the form correctly', () => {
+    expect(component.contactForm).toBeDefined();
+    expect(component.contactForm.controls['name']).toBeDefined();
+    expect(component.contactForm.controls['email']).toBeDefined();
+    expect(component.contactForm.controls['phone']).toBeDefined();
+    expect(component.contactForm.controls['message']).toBeDefined();
+    expect(component.contactForm.controls['reasonForContact']).toBeDefined();
+    expect(component.contactForm.controls['bestWayToContact']).toBeDefined();
   });
 });
