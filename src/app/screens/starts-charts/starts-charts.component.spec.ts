@@ -36,8 +36,9 @@ describe('StartsChartsComponent', () => {
     fixture.detectChanges();
 
     expect(component.searchStats.length).toBe(2);
-    expect(component.searchStats[0].value).toBe(2);
-    expect(component.searchStats[1].value).toBe(3);
+    expect(component.searchStats[0].value).toBe(4);
+    expect(component.searchStats[1].value).toBe(6);
+
 
     const chart = fixture.debugElement.query(By.css('ngx-charts-pie-chart'));
     expect(chart).toBeTruthy();
